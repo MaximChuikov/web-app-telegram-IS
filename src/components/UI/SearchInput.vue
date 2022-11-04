@@ -24,13 +24,15 @@ export default {
 
 <style scope>
 input{
-    height: 30px;
-    margin: 10px;
-    padding-left: 10px;
-    border-radius: 3px;
-    font-size: 16px;
-    border: 1px solid black;
-    transition: all 2s ease;
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+  height: 30px;
+  margin: 10px;
+  padding-left: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  border: 1px solid black;
+  transition: all 2s ease;
 }
 
 input:focus{
