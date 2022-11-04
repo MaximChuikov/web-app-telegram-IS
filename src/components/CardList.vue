@@ -3,8 +3,8 @@
     <div>
       <div class="card" v-for="card in cards" v-bind:key="card">
         <div class="card__info">
-          <p class="card__name">{{card.name}}</p>
-          <p class="card__phone">{{card.phone}}</p>
+          <p class="card__name">{{card.full_name}}</p>
+          <p class="card__phone">{{card.phone_number}}</p>
         </div>
         <div class="card__actions">
           <div class="card__status" :class="card.status ? 'background-green' : 'background-red'">
@@ -51,7 +51,7 @@ export default {
   display: flex;
   justify-content: space-between;
   position: relative;
-  background-color: rgb(242, 242, 242);
+  background-color: var(--tg-theme-secondary-bg-color);
   border-radius: 3px;
   padding: 10px;
   margin: 8px;

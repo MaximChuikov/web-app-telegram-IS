@@ -24,17 +24,17 @@ export default {
   data(){
     return {
       cards: [
-        {id: 0, name: "Козлов Илья Адамович", phone: "8 993 343 23 53", status: true},
-        {id: 1, name: "Белова Ника Александровна", phone: "8 993 343 23 53", status: true},
-        {id: 2, name: "Румянцев Владислав Петрович", phone: "8 993 343 23 53", status: false},
-        {id: 3, name: "Рыжова Анна Георгиевна", phone: "8 993 343 23 53", status: true},
-        {id: 4, name: "Зайцева Сабина Робертовна", phone: "8 543 343 23 53", status: false},
-        {id: 5, name: "Иванов Демид Дмитриевич", phone: "8 993 343 23 53", status: false},
-        {id: 6, name: "Серебряков Константин Андреевич", phone: "8 993 343 23 53", status: true},
-        {id: 7, name: "Козлов Илья Адамович", phone: "8 993 343 23 53", status: true},
-        {id: 8, name: "Белова Ника Александровна", phone: "8 993 343 23 53", status: true},
-        {id: 9, name: "Румянцев Владислав Петрович", phone: "8 993 343 23 53", status: false},
-        {id: 10, name: "Рыжова Анна Георгиевна", phone: "8 993 343 23 53", status: true},
+        {id: 0, full_name: "Козлов Илья Адамович", phone_number: "8 993 343 23 53", status: true},
+        {id: 1, full_name: "Белова Ника Александровна", phone_number: "8 993 343 23 53", status: true},
+        {id: 2, full_name: "Румянцев Владислав Петрович", phone_number: "8 993 343 23 53", status: false},
+        {id: 3, full_name: "Рыжова Анна Георгиевна", phone_number: "8 993 343 23 53", status: true},
+        {id: 4, full_name: "Зайцева Сабина Робертовна", phone_number: "8 543 343 23 53", status: false},
+        {id: 5, full_name: "Иванов Демид Дмитриевич", phone_number: "8 993 343 23 53", status: false},
+        {id: 6, full_name: "Серебряков Константин Андреевич", phone_number: "8 993 343 23 53", status: true},
+        {id: 7, full_name: "Козлов Илья Адамович", phone_number: "8 993 343 23 53", status: true},
+        {id: 8, full_name: "Белова Ника Александровна", phone_number: "8 993 343 23 53", status: true},
+        {id: 9, full_name: "Румянцев Владислав Петрович", phone_number: "8 993 343 23 53", status: false},
+        {id: 10, full_name: "Рыжова Анна Георгиевна", phone_number: "8 993 343 23 53", status: true},
       ],
       filtredData: []
     }
@@ -55,8 +55,8 @@ export default {
   },
   mounted(){ //TODO query
     axios
-      .get("")
-      .then(response => {console.log(response)});
+      .get("http://localhost:8000/verification/?name_responsible=" + "ФИО ответственного")
+      .then(response => {console.log(response.data)});
   }
 }
 </script>

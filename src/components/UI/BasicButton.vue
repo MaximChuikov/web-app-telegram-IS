@@ -12,7 +12,7 @@
 
 <style scoped>
 .btn{
-  background-color: #1565C0;
+  background-color: var(--tg-theme-button-color);
   color: #fff;
   box-shadow: 0 0 1px black;
   padding: 10px;
