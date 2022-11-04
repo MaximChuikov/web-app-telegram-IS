@@ -65,6 +65,9 @@ export default {
 body, *{
   margin: 0;
   box-sizing: border-box;
+}
+
+body{
   background-color: var(--tg-theme-secondary-bg-color);
 }
 

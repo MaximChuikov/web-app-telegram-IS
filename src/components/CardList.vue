@@ -72,7 +72,7 @@ export default {
   position:relative;
   width: 14px;
   height: 14px;
-  background-color: #fff;
+  background-color: var(--tg-theme-bg-color);
   border-radius: 7px;
   top: 8px;
   left: 8px;
