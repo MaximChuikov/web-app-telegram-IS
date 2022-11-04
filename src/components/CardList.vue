@@ -51,10 +51,11 @@ export default {
   display: flex;
   justify-content: space-between;
   position: relative;
-  background-color: var(--tg-theme-secondary-bg-color);
+  background-color: var(--tg-theme-bg-color);
   border-radius: 3px;
   padding: 10px;
   margin: 8px;
+  color: var(--tg-theme-text-color);
 }
 
 .card__info p{
