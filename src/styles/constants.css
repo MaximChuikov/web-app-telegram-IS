@@ -2,7 +2,7 @@ html {
     --blue-gradient: linear-gradient(317deg,#2b2c95 0,#4272e6 100%);
     --blue-gradient-focused: linear-gradient(317deg, #20216e 0, #345bb7 100%);
     --blue-color: #466ed2;
-    background-color: var(--tg-theme-secondary-bg-color)
+    /*background-color: var(--tg-theme-secondary-bg-color)*/
 }
 * {
     font-family: "Open sans", sans-serif;
