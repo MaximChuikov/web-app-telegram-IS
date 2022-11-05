@@ -1,5 +1,5 @@
 <template>
-    <input type="text" v-bind:value="str" @input="changeInputText" :placeholder="this.text"/>
+    <input type="text" class="search-input" v-bind:value="str" @input="changeInputText" :placeholder="this.text"/>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scope>
-input{
+.search-input {
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
   height: 30px;
@@ -35,12 +35,12 @@ input{
   transition: all 2s ease;
 }
 
-input:focus{
+.search-input:focus{
   border-radius: 20px;
   outline: none;
 }
 
-input:focus::placeholder{
+.search-input:focus::placeholder{
     visibility: hidden;
 }
 </style>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CardList from './components/CardList.vue'
+import CardList from '../components/CardList.vue'
 import axios from 'axios';
 
 export default {
@@ -62,14 +62,14 @@ export default {
 </script>
 
 <style>
-body, *{
-  margin: 0;
-  box-sizing: border-box;
-}
+/*body, *{*/
+/*  margin: 0;*/
+/*  box-sizing: border-box;*/
+/*}*/
 
-body{
-  background-color: var(--tg-theme-secondary-bg-color);
-}
+/*body{*/
+/*  background-color: var(--tg-theme-secondary-bg-color);*/
+/*}*/
 
 .container{
   display: flex;
