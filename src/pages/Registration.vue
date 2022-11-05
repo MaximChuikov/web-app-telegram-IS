@@ -1,11 +1,15 @@
 <template>
   <div class="ribbon"></div>
   <div class="main-card">
-    <img src="	https://kopeysk.is74.ru/oldsite/abonents/img/logo_white.jpg"
+    <img class="reg-back-button"
+         src="https://kopeysk.is74.ru/oldsite/business/assets/img/arrow.png"
+         @click="goBack">
+
+    <img src="https://kopeysk.is74.ru/oldsite/abonents/img/logo_white.jpg"
          class="logo" alt="Интерсвязь, твой шаг в будущее"/>
-    <h1>Новый сотрудник</h1>
-    <p>Необходимо ввести данные сотрудника</p>
-    <form>
+    <h1 class="reg-h1">Новый сотрудник</h1>
+    <p class="reg-p">Необходимо ввести данные сотрудника</p>
+    <form @submit="doPost">
       <div class="input-container">
 
         <div class="input_wrap">
@@ -37,19 +41,56 @@
         </div>
 
       </div>
-      <button>Добавить</button>
+      <button type="submit" class="reg-button">Добавить</button>
     </form>
   </div>
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
-  name: "RegistrationPage"
+  name: "RegistrationPage",
+  methods: {
+    async doPost() {
+      await axios.post('', {
+        job: document.getElementById('job').value,
+        first_name: document.getElementById('first_name').value,
+        last_name: document.getElementById('last_name').value,
+        mid_name: document.getElementById('mid_name').value,
+        phone: document.getElementById('phone').value,
+        birth: document.getElementById('birth').value,
+      })
+    },
+    goBack() {
+      window.history.back()
+    }
+  }
 }
 </script>
 
 <style scoped>
 @import "../styles/constants.css";
+
+.reg-back-button {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  border-radius: 100%;
+  padding: 6px;
+  background-color: rgba(255, 255, 255, 10%);
+  rotate: 180deg;
+  cursor: pointer;
+  box-shadow: -1px -1px 4px #BBB;
+  transition: 0.3s;
+}
+.reg-back-button:hover {
+  background-color: rgb(150, 150, 150, 10%);
+  box-shadow: -2px -2px 7px #BBB;
+}
 
 .ribbon {
   background: rgba(200, 200, 200, .42);
@@ -83,7 +124,7 @@ export default {
   border-radius: 5px;
   text-align: center;
   color: #FFF;
-  text-shadow: 0 1px 0 #BBB;
+  text-shadow: 0 1px 2px #BBB;
   max-width: 300px;
   margin: 0 auto;
   padding: 15px 40px 20px 40px;
@@ -102,13 +143,13 @@ export default {
   margin: 0 auto;
 }
 
-h1 {
+.reg-h1 {
   font-size: 1.6em;
   margin-top: 3px;
   margin-bottom: 10px;
 }
 
-p {
+.reg-p {
   font-family: 'Open Sans', Arial, sans-serif;
   font-weight: 300;
   color: #7B808A;
@@ -162,6 +203,7 @@ p {
   top: -5px;
   left:10px;
   background: #ffffff;
+  border-radius: 10px;
   padding: 0 5px 0 5px;
 }
 
@@ -171,13 +213,12 @@ p {
   top: -5px;
   left:10px;
   background: #ffffff;
+  border-radius: 10px;
   padding: 0 5px 0 5px;
 }
 .reg-input[type=tel]:placeholder-shown{
   color: #466ed2;
 }
-
-
 
 .input_wrap {
   width:100%;
@@ -212,7 +253,7 @@ p {
 }
 
 
-button {
+.reg-button {
   margin-top: 20px;
   display: block;
   width: 100%;

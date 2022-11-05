@@ -1,5 +1,5 @@
 <template>
-  <a href="{{ link }}" class="block-link-a">
+  <a v-bind:href="link" class="block-link-a">
     <img v-bind:src="avatar"
          class="avatar"
          alt="Фото">

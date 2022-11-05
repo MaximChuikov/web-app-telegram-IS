@@ -1,4 +1,7 @@
 <template>
+  <BlockLink text="Добавить"
+             avatar="https://kopeysk.is74.ru/oldsite/abonents/img/icon_job2.png"
+             link="reg"/>
   <CardList
     v-if="filtredData.length==0"
     @changeStatus="changeStatus"
@@ -15,10 +18,12 @@
 <script>
 import CardList from '../components/CardList.vue'
 import axios from 'axios';
+import BlockLink from "@/components/BlockLink";
 
 export default {
   name: 'App',
   components: {
+    BlockLink,
     CardList,
   },
   data(){
@@ -65,10 +70,6 @@ export default {
 /*body, *{*/
 /*  margin: 0;*/
 /*  box-sizing: border-box;*/
-/*}*/
-
-/*body{*/
-/*  background-color: var(--tg-theme-secondary-bg-color);*/
 /*}*/
 
 .container{
