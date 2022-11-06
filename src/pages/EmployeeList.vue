@@ -61,7 +61,12 @@ export default {
   },
   mounted() { //TODO query
     axios
-        .get("https://7966-185-233-200-96.eu.ngrok.io/get_all_employees_on_id_deportament/?id_deportament=9")
+        .get("https://7966-185-233-200-96.eu.ngrok.io/get_all_employees_on_id_deportament/?id_deportament=9",
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420"
+            }
+        })
         .then(response => {
           this.cards = [...response.data.result];
           console.log(response.data.result);
