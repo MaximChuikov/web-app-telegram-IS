@@ -1,5 +1,6 @@
 <template>
   <BlockLink text="Добавить"
+             class="add-btn"
              avatar="https://kopeysk.is74.ru/oldsite/abonents/img/icon_job2.png"
              link="reg"/>
   <CardList
@@ -60,8 +61,11 @@ export default {
   },
   mounted(){ //TODO query
     axios
-      .get("http://localhost:8000/verification/?name_responsible=" + "ФИО ответственного")
-      .then(response => {console.log(response.data)});
+      .get("http://127.0.0.1:8000/get_all_employees_on_id_deportament/?id_deportament=9")
+      .then(response => {
+        this.cards = [...response.data.result];
+        console.log(response.data.result);
+      });
   }
 }
 </script>
@@ -71,6 +75,11 @@ export default {
 /*  margin: 0;*/
 /*  box-sizing: border-box;*/
 /*}*/
+
+.add-btn{
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .container{
   display: flex;
