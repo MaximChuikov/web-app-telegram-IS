@@ -11,9 +11,10 @@
 </script>
 
 <style scoped>
+@import "../../styles/constants.css";
 .btn{
-  background-color: var(--tg-theme-button-color);
-  color: var(--tg-theme-button-text-color);
+  background: var(--blue-gradient);
+  color: white;
   box-shadow: 0 0 1px black;
   padding: 10px;
   border: none;
