@@ -61,7 +61,7 @@ export default {
   },
   mounted(){ //TODO query
     axios
-      .get("http://127.0.0.1:8000/get_all_employees_on_id_deportament/?id_deportament=9")
+      .get("http://185.233.200.96/get_all_employees_on_id_deportament/?id_deportament=9")
       .then(response => {
         this.cards = [...response.data.result];
         console.log(response.data.result);
