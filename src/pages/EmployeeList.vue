@@ -4,13 +4,13 @@
              avatar="https://kopeysk.is74.ru/oldsite/abonents/img/icon_job2.png"
              link="reg"/>
   <CardList
-    v-if="filtredData.length==0"
-    @changeStatus="changeStatus"
-    v-bind:cards="cards"/>
-    <CardList
-    v-else
-    @changeStatus="changeStatus"
-    v-bind:cards="filtredData"/>
+      v-if="filtredData.length==0"
+      @changeStatus="changeStatus"
+      v-bind:cards="cards"/>
+  <CardList
+      v-else
+      @changeStatus="changeStatus"
+      v-bind:cards="filtredData"/>
   <div class="container">
     <SearchInputVue class="input" @changeInputText="filter" text="Фильтр по ФИО"></SearchInputVue>
   </div>
@@ -27,7 +27,7 @@ export default {
     BlockLink,
     CardList,
   },
-  data(){
+  data() {
     return {
       cards: [
         {id: 0, full_name: "Козлов Илья Адамович", phone_number: "8 993 343 23 53", status: true},
@@ -45,46 +45,45 @@ export default {
       filtredData: []
     }
   },
-  methods:{
-    changeStatus(card){
-        console.log(card);
-        let index = this.cards.indexOf(card);
-        this.cards[index].status = !this.cards[index].status;
-        //TODO query
+  methods: {
+    changeStatus(card) {
+      console.log(card);
+      let index = this.cards.indexOf(card);
+      this.cards[index].status = !this.cards[index].status;
+      //TODO query
     },
-    filter(str){
-        console.log(str);
-        this.filtredData = this.cards.filter(function(card) {
-          return card.name.includes(str);
-        });
+    filter(str) {
+      console.log(str);
+      this.filtredData = this.cards.filter(function (card) {
+        return card.name.includes(str);
+      });
     },
   },
-  mounted(){ //TODO query
+  mounted() { //TODO query
     axios
-      .get("http://185.233.200.96/get_all_employees_on_id_deportament/?id_deportament=9")
-      .then(response => {
-        this.cards = [...response.data.result];
-        console.log(response.data.result);
-      });
+        .get("http://185.233.200.96/get_all_employees_on_id_deportament/?id_deportament=9")
+        .then(response => {
+          this.cards = [...response.data.result];
+          console.log(response.data.result);
+        });
   }
 }
 </script>
 
 <style>
-.add-btn{
-  margin-left: auto;
+.add-btn {
   margin-right: auto;
 }
 
-.container{
+.container {
   display: flex;
   align-items: stretch;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%
 }
 
-.input{
+.input {
   width: 100%;
 }
 </style>

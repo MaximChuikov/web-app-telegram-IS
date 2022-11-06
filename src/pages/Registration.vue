@@ -3,7 +3,7 @@
   <div class="main-card">
     <img class="reg-back-button"
          src="https://kopeysk.is74.ru/oldsite/business/assets/img/arrow.png"
-         @click="goBack">
+         @click="goBack" alt="<">
 
     <img src="https://kopeysk.is74.ru/oldsite/abonents/img/logo_white.jpg"
          class="logo" alt="Интерсвязь, твой шаг в будущее"/>
@@ -62,6 +62,7 @@ export default {
         phone: document.getElementById('phone').value,
         birth: document.getElementById('birth').value,
       })
+      this.goBack()
     },
     goBack() {
       window.history.back()

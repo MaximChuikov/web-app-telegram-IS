@@ -19,11 +19,11 @@
   padding: 10px;
   border: none;
   border-radius: 10px;
-  transition: border-radius 0.4s ease;
+  transition: 0.25s linear;
 }
 
 .btn:hover{
-  border-radius: 25px;
+  filter: hue-rotate(12deg);
 }
 
 .btn:active{

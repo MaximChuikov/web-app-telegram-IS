@@ -22,21 +22,18 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .search-input {
-  background-color: var(--tg-theme-bg-color);
-  color: var(--tg-theme-text-color);
+  background-color: white;
   height: 30px;
-  margin: 10px;
+  margin: 10px 0;
   padding-left: 10px;
   border-radius: 3px;
   font-size: 16px;
-  border: 1px solid black;
-  transition: all 2s ease;
+  border: 1px solid var(--gray-color);
 }
 
 .search-input:focus{
-  border-radius: 20px;
   outline: none;
 }
 

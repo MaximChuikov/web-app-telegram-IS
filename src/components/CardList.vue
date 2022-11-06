@@ -54,8 +54,7 @@ export default {
   background-color: #f3f3f3;
   border-radius: 3px;
   padding: 10px;
-  margin: 8px;
-  color: var(--tg-theme-text-color);
+  margin: 8px 0;
 }
 
 .card__info p{

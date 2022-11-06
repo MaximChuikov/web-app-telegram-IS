@@ -5,12 +5,12 @@ const currentRoute = window.location.pathname
 const NotFound = <p>Page not found</p>
 
 const routes = {
-    '/': <EmployeeList/>,
-    '/reg': <Registration/>
+'/': <EmployeeList/>,
+'/reg': <Registration/>
 }
 
 const App = () => {
-  return routes[currentRoute] ?? NotFound
+return routes[currentRoute] ?? NotFound
 }
 
 export default App
