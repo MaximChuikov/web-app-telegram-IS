@@ -20,7 +20,7 @@
           <input type="tel" id="phone" required
                  pattern="89[\d]{9}" class="reg-input"
                  placeholder=" "
-          title="89000111222">
+          title="Телефон начинается с 8 и без различных знаков. Например, 89000111222">
           <label>Номер телефона</label>
         </div>
         <div class="input_wrap">
@@ -169,6 +169,12 @@ export default {
   box-shadow: none;
 }
 
+.reg-input:-webkit-autofill,
+.reg-input:-webkit-autofill:hover,
+.reg-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  -webkit-text-fill-color: var(--gray-color);
+}
 
 .not-visible{
   color: transparent;
@@ -204,7 +210,7 @@ export default {
   top: -5px;
   left:10px;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 2px;
   padding: 0 5px 0 5px;
 }
 
@@ -219,6 +225,20 @@ export default {
 }
 .reg-input[type=tel]:placeholder-shown{
   color: #466ed2;
+}
+
+.reg-input[type=tel]:valid + label {
+  animation-name: phone-valid;
+  animation-duration: 2s;
+}
+
+@keyframes phone-valid {
+  20% {
+    color: #2ea630;
+  }
+  50% {
+    color: #2ea630;
+  }
 }
 
 .input_wrap {

@@ -48,7 +48,7 @@ export default {
 .block-link-p:before {
   content: "";
   width: 0;
-  bottom: 0;
+  bottom: -2px;
   height: 2px;
   background: rgba(38, 71, 150, 0.4);
   transition: .2s ease-in-out;
