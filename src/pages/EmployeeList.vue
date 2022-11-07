@@ -53,10 +53,11 @@ export default {
       //TODO query
     },
     filter(str) {
-      console.log(str);
-      this.filtredData = this.cards.filter(function (card) {
-        return card.name.includes(str);
-      });
+      let currentFilter = str.toUpperCase();
+      this.filtredData = [...this.cards.filter(function (card) {
+        let currentName = card.full_name.toUpperCase();
+        return currentName.indexOf(currentFilter) >= 0;
+      })];
     },
   },
   mounted() { //TODO query
