@@ -48,9 +48,22 @@ export default {
   methods: {
     changeStatus(card) {
       console.log(card);
-      let index = this.cards.indexOf(card);
-      this.cards[index].status = !this.cards[index].status;
-      //TODO query
+      axios
+        .get("https://1472-185-233-200-96.eu.ngrok.io/change_status_aboniment/?id_employ=" + card.id,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420"
+            }
+        })
+        .then(response => {
+          let cardStatus = [...response.data.result];
+          if(cardStatus === true || cardStatus === false)
+          {
+            let index = this.cards.indexOf(card);
+            this.cards[index].status = cardStatus;
+          }
+          console.log(response.data.result);
+        });
     },
     filter(str) {
       let currentFilter = str.toUpperCase();
@@ -62,7 +75,7 @@ export default {
   },
   mounted() { //TODO query
     axios
-        .get("https://98a6-185-233-200-96.eu.ngrok.io/get_all_employees_on_id_deportament/?id_deportament=7",
+        .get("https://1472-185-233-200-96.eu.ngrok.io/get_all_employees_on_id_deportament/?id_deportament=7",
           {
             headers: {
               "ngrok-skip-browser-warning": "69420"
