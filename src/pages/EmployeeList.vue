@@ -56,11 +56,11 @@ export default {
             }
         })
         .then(response => {
-          let cardStatus = [...response.data.result];
+          let cardStatus = response.data.result;
           if(cardStatus === true || cardStatus === false)
           {
             let index = this.cards.indexOf(card);
-            this.cards[index].status = cardStatus;
+            this.cards[index].abonnement_status = cardStatus;
           }
           console.log(response.data.result);
         });
@@ -83,7 +83,7 @@ export default {
         })
         .then(response => {
           this.cards = [...response.data.result];
-          console.log(response.data.result);
+          console.log(this.cards);
         });
   }
 }

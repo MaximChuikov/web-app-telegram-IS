@@ -6,12 +6,12 @@
         <p class="card__phone">{{ card.phone_number }}</p>
       </div>
       <div class="card__actions">
-        <div class="card__status" :rel="card.status ? 'yes' : 'no'">
+        <div class="card__status" :rel="card.abonnement_status ? 'yes' : 'no'">
           <div class="card__status-center"></div>
         </div>
         <BasicButtonVue
             class="card__btn"
-            v-on:click="changeStatus(card)" v-if="card.status">
+            v-on:click="changeStatus(card)" v-if="card.abonnement_status">
           Отменить<br/> абонемент
         </BasicButtonVue>
         <BasicButtonVue
