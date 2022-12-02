@@ -44,15 +44,23 @@ export default {
   },
   methods: {
     async deletePeople() {
-      await axios.delete(`https://1472-185-233-200-96.eu.ngrok.io?employee_id=${this.emp_id}`)
+      await axios.delete(`https://1472-185-233-200-96.eu.ngrok.io?id=${this.emp_id}`)
     },
     closePopup() {
       this.$emit('onClose')
     },
     async getPeople() {
-      const employee = await axios.get(`https://1472-185-233-200-96.eu.ngrok.io/get_employee?employee_id=${this.emp_id}`)
-          .then(e => e.data.result)
+      const employee = await axios.get(`https://1472-185-233-200-96.eu.ngrok.io/get_employee?id=${this.emp_id}`,{
+        headers: {
+          "ngrok-skip-browser-warning": "69420"
+        }
+      })
+          .then(e => {
+            console.log(e)
+            e.data.result
+          })
           .catch(e => {
+            console.log(e)
             alert("Ошибка " + e.message)
             this.$emit('onClose')
           })
