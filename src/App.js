@@ -6,7 +6,7 @@ const NotFound = <p>Page not found</p>
 
 const routes = {
 '/': <EmployeeList/>,
-'/reg': <Registration/>
+'/reg': <Registration/>,
 }
 
 const App = () => {

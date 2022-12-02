@@ -4,13 +4,13 @@
              avatar="https://kopeysk.is74.ru/oldsite/abonents/img/icon_job2.png"
              link="reg"/>
   <CardList
-      v-if="filtredData.length==0"
+      v-if="filteredData.length==0"
       @changeStatus="changeStatus"
       v-bind:cards="cards"/>
   <CardList
       v-else
       @changeStatus="changeStatus"
-      v-bind:cards="filtredData"/>
+      v-bind:cards="filteredData"/>
   <div class="container">
     <SearchInputVue class="input" @changeInputText="filter" text="Фильтр по ФИО"></SearchInputVue>
   </div>
@@ -29,6 +29,7 @@ export default {
   },
   data() {
     return {
+      editShow: true,
       cards: [
         {id: 0, full_name: "Козлов Илья Адамович", phone_number: "8 993 343 23 53", status: true},
         {id: 1, full_name: "Белова Ника Александровна", phone_number: "8 993 343 23 53", status: true},
@@ -42,7 +43,7 @@ export default {
         {id: 9, full_name: "Румянцев Владислав Петрович", phone_number: "8 993 343 23 53", status: false},
         {id: 10, full_name: "Рыжова Анна Георгиевна", phone_number: "8 993 343 23 53", status: true},
       ],
-      filtredData: []
+      filteredData: []
     }
   },
   methods: {
@@ -67,7 +68,7 @@ export default {
     },
     filter(str) {
       let currentFilter = str.toUpperCase();
-      this.filtredData = [...this.cards.filter(function (card) {
+      this.filteredData = [...this.cards.filter(function (card) {
         let currentName = card.full_name.toUpperCase();
         return currentName.indexOf(currentFilter) >= 0;
       })];

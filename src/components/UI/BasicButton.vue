@@ -14,6 +14,8 @@
 @import "../../styles/constants.css";
 .btn{
   background: var(--blue-gradient);
+  background-size: 200%;
+  background-position: left;
   color: white;
   box-shadow: 0 0 1px black;
   padding: 10px;
@@ -23,7 +25,7 @@
 }
 
 .btn:hover{
-  filter: hue-rotate(12deg);
+  background-position: right;
 }
 
 .btn:active{
