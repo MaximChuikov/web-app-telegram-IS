@@ -103,7 +103,7 @@ export default {
       this.isEmployee = !this.isEmployee
     },
     async editPeople() {
-      let url = 'https://7352-185-233-200-96.eu.ngrok.io/'
+      let url = 'https://0b21-185-233-200-96.eu.ngrok.io/'
       url += `change_employee/`
       url += `full_name=${
           document.getElementById('last_name').value +
@@ -122,7 +122,7 @@ export default {
           .catch(() => alert('Ошибка'))
     },
     async addPeople() {
-      let url = 'https://7352-185-233-200-96.eu.ngrok.io/'
+      let url = 'https://0b21-185-233-200-96.eu.ngrok.io/'
       url += `create_employee/`
       url += `full_name=${
           document.getElementById('last_name').value +
