@@ -1,15 +1,11 @@
 <template>
   <div class="hello">
-
-    <!--    Поп ап-->
-    <EditEmployee v-if="pop_up_show" @onClose="closePopup" :emp_id="focused_employee_id"/>
-
     <div class="card" v-for="card in cards" v-bind:key="card.id">
       <div class="card__info">
         <p class="card__name">{{ card.full_name }}</p>
         <p class="card__phone">{{ card.phone_number }}</p>
 
-        <img class="edit-button" @click="openPopup(card.id)" :src="require('../assets/images/edit.png')"/>
+        <img class="edit-button" @click="this.$router.push({name: 'edit', params: { emp_id: card.id }})" :src="require('../assets/images/edit.png')"/>
       </div>
       <div class="card__actions">
         <div class="card__status" :rel="card.abonnement_status ? 'yes' : 'no'">
@@ -31,20 +27,16 @@
 </template>
 
 <script>
-
-import EditEmployee from "@/components/EditEmployee";
-
-export default {
-  components: {EditEmployee},
-  props: {
-    cards: Array,
-  },
-  data() {
-    return {
-      test: true,
-      pop_up_show: false,
-      focused_employee_id: 0
-    }
+  export default {
+    props: {
+      cards: Array,
+    },
+    data() {
+      return {
+        test: true,
+        pop_up_show: false,
+        focused_employee_id: 0
+      }
   },
   methods: {
     changeStatus(card) {

@@ -2,7 +2,7 @@
   <img class="reg-back-button"
        src="https://kopeysk.is74.ru/oldsite/business/assets/img/arrow.png"
        @click="goBack" alt="<">
-  <PeopleCard click-handler="post" button-text="Добавить" @onClose="window.location.pathname = '/'"/>
+  <PeopleCard click-handler="post" button-text="Добавить" @onClose="this.$router.push({name: 'home', params: { }})"/>
 </template>
 
 <script>

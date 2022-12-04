@@ -1,6 +1,6 @@
 <template>
-  <div class="b-popup" @click="closePopup">
-    <img class="close-button" @click="closePopup" :src="require('../assets/images/cross.png')" alt="Х"/>
+  <div class="b-popup">
+    <img class="close-button" @click="this.$router.push({name: 'home', params: { }})" :src="require('../assets/images/cross.png')" alt="Х"/>
     <div class="b-popup-content" v-on:click.stop>
       <button class="delete-button" @click="deletePeople">
         Удалить
@@ -33,21 +33,19 @@ export default {
       phone: "",
       job: "",
       is_employee: "",
-      birth: ""
+      birth: "",
+      emp_id: ""
     }
   },
   props: {
-    emp_id: Number,
   },
   beforeMount() {
+    this.emp_id = this.$route.params.emp_id;
     this.getPeople()
   },
   methods: {
     async deletePeople() {
       await axios.delete(`https://0b21-185-233-200-96.eu.ngrok.io?id=${this.emp_id}`)
-    },
-    closePopup() {
-      this.$emit('onClose')
     },
     async getPeople() {
       const employee = await axios.get(`https://0b21-185-233-200-96.eu.ngrok.io/get_employee?id=${this.emp_id}`,{
@@ -62,7 +60,7 @@ export default {
           .catch(e => {
             console.log(e)
             alert("Ошибка " + e.message)
-            this.$emit('onClose')
+            this.$router.push({name: 'home', params: { }})
           })
       const name = employee.full_name.split(' ')
       this.first_name = name[1]
@@ -96,7 +94,6 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   overflow: hidden;
   position: fixed;
   top: 0;
