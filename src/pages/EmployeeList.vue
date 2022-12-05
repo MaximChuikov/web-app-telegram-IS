@@ -11,6 +11,15 @@
       v-else
       @changeStatus="changeStatus"
       v-bind:cards="filteredData"/>
+  <div class="personal-data">
+    <h5>WebAppInitData</h5>
+    <div>user: {window.Telegram.WebApp.WebAppInitData.user}</div>
+
+    <h5>WebAppUser</h5>
+    <div>id: {window.Telegram.WebApp.WebAppUser.id}</div>
+    <div>first_name: {window.Telegram.WebApp.WebAppUser.first_name}</div>
+    <div>photo_url: {window.Telegram.WebApp.WebAppUser.photo_url}</div>
+  </div>
   <div class="container">
     <SearchInputVue class="input" @changeInputText="filter" text="Фильтр по ФИО"></SearchInputVue>
   </div>
@@ -63,11 +72,6 @@ export default {
     },
   },
   mounted() { //TODO query
-    console.log('данные от телеграм WebAppInitData:');
-    console.log(window.Telegram.WebApp.WebAppInitData);
-
-    console.log('данные от телеграм WebAppUser:');
-    console.log(window.Telegram.WebApp.WebAppUser);
     axios
         .get("https://0b21-185-233-200-96.eu.ngrok.io/get_all_employees_on_id_deportament/?id_deportament=8",
           {
