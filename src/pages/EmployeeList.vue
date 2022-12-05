@@ -11,7 +11,7 @@
       v-else
       @changeStatus="changeStatus"
       v-bind:cards="filteredData"/>
-  <div class="personal-data">
+  <!-- <div class="personal-data">
     <h5>WebAppInitData</h5>
     <div>user: {{window.Telegram.WebApp.WebAppInitData.user}}</div>
 
@@ -19,7 +19,7 @@
     <div>id: {{window.Telegram.WebApp.WebAppUser.id}}</div>
     <div>first_name: {{window.Telegram.WebApp.WebAppUser.first_name}}</div>
     <div>photo_url: {{window.Telegram.WebApp.WebAppUser.photo_url}}</div>
-  </div>
+  </div> -->
   <div class="container">
     <SearchInputVue class="input" @changeInputText="filter" text="Фильтр по ФИО"></SearchInputVue>
   </div>
