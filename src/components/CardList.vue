@@ -5,7 +5,7 @@
         <p class="card__name">{{ card.full_name }}</p>
         <p class="card__phone">{{ card.phone_number }}</p>
 
-        <img class="edit-button" @click="this.$router.push({name: 'edit', params: { emp_id: card.id }})" :src="require('../assets/images/edit.png')"/>
+        <img class="edit-button" @click="redirectEdit(card.id)" :src="require('../assets/images/edit.png')"/>
       </div>
       <div class="card__actions">
         <div class="card__status" :rel="card.abonnement_status ? 'yes' : 'no'">
@@ -27,27 +27,25 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      cards: Array,
-    },
-    data() {
-      return {
-        test: true,
-        pop_up_show: false,
-        focused_employee_id: 0
-      }
+
+
+export default {
+  props: {
+    cards: Array,
+  },
+  data() {
+    return {
+      test: true,
+      pop_up_show: false,
+      focused_employee_id: 0
+    }
   },
   methods: {
     changeStatus(card) {
       this.$emit('changeStatus', card);
     },
-    openPopup(id) {
-      this.focused_employee_id = id
-      this.pop_up_show = true
-    },
-    closePopup() {
-      this.pop_up_show = false
+    redirectEdit(id) {
+      this.$router.push('/edit/' + id)
     }
   }
 }

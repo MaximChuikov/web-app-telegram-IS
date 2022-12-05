@@ -1,21 +1,18 @@
 <template>
-  <div class="b-popup">
-    <img class="close-button" @click="this.$router.push({name: 'home', params: { }})" :src="require('../assets/images/cross.png')" alt="Х"/>
-    <div class="b-popup-content" v-on:click.stop>
-      <button class="delete-button" @click="deletePeople">
-        Удалить
-      </button>
-      <PeopleCard click-handler="edit"
-                  button-text="Сохранить изменения"
-                  first_name=""
-                  last_name=""
-                  mid_name=""
-                  phone=""
-                  job=""
-                  is_employee=""
-                  birth=""/>
-    </div>
-  </div>
+  <img class="close-button" @click="this.$router.push('/')" :src="require('../assets/images/cross.png')" alt="Х"/>
+  <button class="delete-button" @click="deletePeople">
+    Удалить
+  </button>
+  <PeopleCard click-handler="edit"
+              button-text="Сохранить изменения"
+              :first_name=first_name
+              :last_name=last_name
+              :mid_name=mid_name
+              :phone=phone
+              :job=job
+              :is_employee=is_employee
+              :birth=birth
+  />
 </template>
 
 <script>
@@ -31,45 +28,41 @@ export default {
       last_name: "",
       mid_name: "",
       phone: "",
-      job: "",
+      job: 0,
       is_employee: "",
       birth: "",
       emp_id: ""
     }
   },
-  props: {
-  },
-  beforeMount() {
+  props: {},
+  beforeCreate() {
     this.emp_id = this.$route.params.emp_id;
-    this.getPeople()
+    axios.get(`https://0b21-185-233-200-96.eu.ngrok.io/get_employee?id=${this.emp_id}`, {
+      headers: {
+        "ngrok-skip-browser-warning": "69420"
+      }
+    })
+        .then(e => {
+          console.log(e)
+          const employee = e.data.result
+          const name = employee.full_name.split(' ')
+          this.first_name = name[1]
+          this.last_name = name[0]
+          this.mid_name = name[2]
+          this.phone = employee.phone_number
+          this.job = employee.department_id
+          this.birth = employee.date_born.split(' ')[0]
+          this.is_employee = employee.is_employee
+        })
+        .catch(e => {
+          console.log(e)
+          alert("Ошибка " + e.message)
+          this.$router.push({name: 'home', params: {}})
+        })
   },
   methods: {
     async deletePeople() {
       await axios.delete(`https://0b21-185-233-200-96.eu.ngrok.io?id=${this.emp_id}`)
-    },
-    async getPeople() {
-      const employee = await axios.get(`https://0b21-185-233-200-96.eu.ngrok.io/get_employee?id=${this.emp_id}`,{
-        headers: {
-          "ngrok-skip-browser-warning": "69420"
-        }
-      })
-          .then(e => {
-            console.log(e)
-            e.data.result
-          })
-          .catch(e => {
-            console.log(e)
-            alert("Ошибка " + e.message)
-            this.$router.push({name: 'home', params: { }})
-          })
-      const name = employee.full_name.split(' ')
-      this.first_name = name[1]
-      this.last_name = name[0]
-      this.mid_name = name[2]
-      this.phone = employee.phone
-      this.job = employee.department_name
-      this.birth = employee.date_born
-      this.is_employee = employee.is_employee
     }
   }
 }

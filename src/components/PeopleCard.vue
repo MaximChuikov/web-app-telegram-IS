@@ -15,9 +15,12 @@
 
       <p class="reg-p">Необходимо ввести данные</p>
       <form>
+
         <div class="input-container">
           <div class="input_wrap">
-            <input class="reg-input" type="text" id="job" v-bind:value=job required>
+            <select id="job" class="select">
+              <option v-for="item in departments" :key="item.id">{{item.name}}</option>
+            </select>
             <label>Отдел</label>
           </div>
           <div class="input_wrap">
@@ -65,8 +68,8 @@ export default {
     clickHandler: String,
     buttonText: String,
     job: {
-      type: String,
-      default: ""
+      type: Number,
+      default: 0
     },
     first_name: {
       type: String,
@@ -92,36 +95,57 @@ export default {
       type: Boolean,
       default: true
     },
+    emp_id: {
+      type: Number
+    }
   },
   data() {
     return {
-      isEmployee: this.is_employee
+      isEmployee: this.is_employee,
+      departments: [
+        { name: 'Загрузка', id: 1 }
+      ]
     }
+  },
+  beforeCreate() {
+    axios.get('https://0d79-185-233-200-96.eu.ngrok.io/get_all_departament')
+    .then(e => {
+      this.departments = e.data.result.map(e => {
+        return {
+          id: e.id,
+          name: e.name
+        }
+      })
+      if (this.job !== 0) {
+        document.getElementById("job").value = this.job;
+      }
+    })
   },
   methods: {
     changePeople() {
       this.isEmployee = !this.isEmployee
     },
-    async editPeople() {
+    editPeople() {
       let url = 'https://0b21-185-233-200-96.eu.ngrok.io/'
-      url += `change_employee/`
+      url += `change_employee?`
+      url += `id=${this.emp_id}&`
       url += `full_name=${
           document.getElementById('last_name').value +
           document.getElementById('first_name').value +
           document.getElementById('mid_name').value
-      }`
-      url += `phone_number=${document.getElementById('phone').value}`
-      url += `department_name=${document.getElementById('job').value}`
-      url += `date_born=${document.getElementById('birth').value}`
+      }&`
+      url += `phone_number=${document.getElementById('phone').value}&`
+      url += `department_id=${document.getElementById('job').value}&`
+      url += `date_born=${document.getElementById('birth').value}&`
       url += `is_employee=${this.isEmployee}`
-      await axios.put(url)
+      axios.patch(url)
           .then(() => {
             alert('Изменения сохранены')
             this.$emit('onClose')
           })
           .catch(() => alert('Ошибка'))
     },
-    async addPeople() {
+    addPeople() {
       let url = 'https://0b21-185-233-200-96.eu.ngrok.io/'
       url += `create_employee/`
       url += `full_name=${
@@ -133,7 +157,7 @@ export default {
       url += `department_name=${document.getElementById('job').value}`
       url += `date_born=${document.getElementById('birth').value}`
       url += `is_employee=${this.isEmployee}`
-      await axios.post(url)
+      axios.post(url)
           .then(() => {
             alert('Человек добавлен')
             this.$emit('onClose')
@@ -244,7 +268,7 @@ export default {
   margin-bottom: 30px;
 }
 
-.reg-input {
+.reg-input, .input_wrap select {
   border: none;
   border-radius: 5px;
   height: 47px;
@@ -292,7 +316,7 @@ export default {
   padding: 0 5px 0 5px;
 }
 
-.reg-input:focus + label, .reg-input:valid + label {
+.reg-input:focus + label, .reg-input:valid + label{
   font-size: 12px;
   color: #afbdcf;
   top: -5px;
@@ -352,6 +376,21 @@ export default {
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
   pointer-events: none;
+}
+
+.input_wrap select + label{
+  font-size: 12px;
+  color: #afbdcf;
+  top: -5px;
+  left: 10px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 0 5px 0 5px;
+}
+select select {
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
 }
 
 .reg-input:focus {

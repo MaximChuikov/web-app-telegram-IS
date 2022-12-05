@@ -15,9 +15,10 @@ const routes = [
         component: Registration
     },
     {
-        path: '/edit?:emp_id',
+        path: '/edit/:emp_id',
         name: 'edit',
-        component: EditEmployee
+        component: EditEmployee,
+        params: true
     }
 
 ]

@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     goBack() {
-      window.location.pathname = '/'
+      this.$router.push('/')
     }
   }
 }
