@@ -29,6 +29,7 @@
 import CardList from '../components/CardList.vue'
 import axios from 'axios';
 import BlockLink from "@/components/BlockLink";
+import Requests from "@/server-requests/requests";
 
 export default {
   name: 'App',
@@ -47,7 +48,7 @@ export default {
     changeStatus(card) {
       console.log(card);
       axios
-        .get("https://0b21-185-233-200-96.eu.ngrok.io/change_status_aboniment/?id_employ=" + card.id,
+        .get("https://c0b2-2a09-5302-ffff-00-1ce6.eu.ngrok.io/change_status_aboniment/?id_employ=" + card.id,
           {
             headers: {
               "ngrok-skip-browser-warning": "69420"
@@ -72,17 +73,11 @@ export default {
     },
   },
   mounted() { //TODO query
-    axios
-        .get("https://c0b2-2a09-5302-ffff-00-1ce6.eu.ngrok.io/get_all_employees_on_id_deportament?id_deportament=8",
-          {
-            headers: {
-              "ngrok-skip-browser-warning": "69420"
-            }
-        })
-        .then(response => {
-          this.cards = [...response.data.result];
-          console.log(this.cards);
-        });
+    Requests.getEmployeesByDepId(this.$route.query.id).then(
+        e => {
+          this.cards = e
+        }
+    )
   }
 }
 </script>
