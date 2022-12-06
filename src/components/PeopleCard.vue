@@ -58,6 +58,7 @@
 
 <script>
 import Requests from "@/server-requests/requests";
+import {dep_id} from "@/main";
 
 export default {
   name: "PeopleCard",
@@ -115,6 +116,7 @@ export default {
           document.getElementById("job").value = this.job;
         }
     )
+    alert(dep_id)
   },
   methods: {
     changePeople() {
