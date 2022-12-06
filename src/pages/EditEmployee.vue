@@ -1,5 +1,5 @@
 <template>
-  <img class="close-button" @click="this.$router.push('/')" :src="require('../assets/images/cross.png')" alt="Х"/>
+  <img class="close-button" @click="this.$router.go(-1)" :src="require('../assets/images/cross.png')" alt="Х"/>
   <button class="delete-button" @click="deletePeople">
     Удалить
   </button>
