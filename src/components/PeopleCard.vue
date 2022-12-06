@@ -19,7 +19,7 @@
         <div class="input-container">
           <div class="input_wrap">
             <select id="job" class="selector">
-              <option v-for="item in departments" :key="item.id">{{item.name}}</option>
+              <option v-for="item in departments" :key="item.id">{{ item.name }}</option>
             </select>
             <label>Отдел</label>
           </div>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Requests from "@/server-requests/requests";
 
 export default {
   name: "PeopleCard",
@@ -103,66 +103,44 @@ export default {
     return {
       isEmployee: this.is_employee,
       departments: [
-        { name: 'Загрузка', id: 1 }
+        {name: 'Загрузка', id: 1}
       ]
     }
   },
   beforeCreate() {
-    axios.get('https://0d79-185-233-200-96.eu.ngrok.io/get_all_departament')
-    .then(e => {
-      this.departments = e.data.result.map(e => {
-        return {
-          id: e.id,
-          name: e.name
+    Requests.getDepartments().then(
+        e => {
+          this.departments = e
+          document.getElementById("job").value = this.job;
         }
-      })
-      if (this.job !== 0) {
-        document.getElementById("job").value = this.job;
-      }
-    })
+    )
   },
   methods: {
     changePeople() {
       this.isEmployee = !this.isEmployee
     },
     editPeople() {
-      let url = 'https://0b21-185-233-200-96.eu.ngrok.io/'
-      url += `change_employee?`
-      url += `id=${this.emp_id}&`
-      url += `full_name=${
-          document.getElementById('last_name').value +
-          document.getElementById('first_name').value +
-          document.getElementById('mid_name').value
-      }&`
-      url += `phone_number=${document.getElementById('phone').value}&`
-      url += `department_id=${document.getElementById('job').value}&`
-      url += `date_born=${document.getElementById('birth').value}&`
-      url += `is_employee=${this.isEmployee}`
-      axios.patch(url)
-          .then(() => {
-            alert('Изменения сохранены')
-            this.$emit('onClose')
-          })
-          .catch(() => alert('Ошибка'))
+      Requests.editPeople(
+          this.emp_id,
+          document.getElementById('last_name').value,
+          document.getElementById('first_name').value,
+          document.getElementById('mid_name').value,
+          document.getElementById('phone').value,
+          document.getElementById('job').value,
+          document.getElementById('birth').value,
+          this.isEmployee
+      ).then(() => this.$router.push('/'))
     },
     addPeople() {
-      let url = 'https://0b21-185-233-200-96.eu.ngrok.io/'
-      url += `create_employee/`
-      url += `full_name=${
-          document.getElementById('last_name').value +
-          document.getElementById('first_name').value +
-          document.getElementById('mid_name').value
-      }`
-      url += `phone_number=${document.getElementById('phone').value}`
-      url += `department_name=${document.getElementById('job').value}`
-      url += `date_born=${document.getElementById('birth').value}`
-      url += `is_employee=${this.isEmployee}`
-      axios.post(url)
-          .then(() => {
-            alert('Человек добавлен')
-            this.$emit('onClose')
-          })
-          .catch(() => alert('Ошибка'))
+      Requests.addPeople(
+          document.getElementById('last_name').value,
+          document.getElementById('first_name').value,
+          document.getElementById('mid_name').value,
+          document.getElementById('phone').value,
+          document.getElementById('job').value,
+          document.getElementById('birth').value,
+          this.isEmployee
+      ).then(() => this.$router.push('/'))
     },
     async handler() {
       if (this.clickHandler === "post") {
@@ -316,7 +294,7 @@ export default {
   padding: 0 5px 0 5px;
 }
 
-.reg-input:focus + label, .reg-input:valid + label{
+.reg-input:focus + label, .reg-input:valid + label {
   font-size: 12px;
   color: #afbdcf;
   top: -5px;
@@ -378,7 +356,7 @@ export default {
   pointer-events: none;
 }
 
-.input_wrap select + label{
+.input_wrap select + label {
   font-size: 12px;
   color: #afbdcf;
   top: -5px;
@@ -387,6 +365,7 @@ export default {
   border-radius: 10px;
   padding: 0 5px 0 5px;
 }
+
 .selector {
   border: none;
   outline: none;
