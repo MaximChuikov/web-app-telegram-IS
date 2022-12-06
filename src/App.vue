@@ -7,6 +7,16 @@
 <script>
 
   export default{
+    data() {
+    return {
+      depID: Number,
+    }
+  },
+  methods: {
+    beforeMount(){
+    this.depID = this.$route.query.id;
+ },
+  }
   }
 </script>
 
