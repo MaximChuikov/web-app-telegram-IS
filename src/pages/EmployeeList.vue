@@ -51,7 +51,7 @@ export default {
     changeStatus(card) {
       console.log(card);
       axios
-        .get("https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/change_status_aboniment/?id_employ=" + card.id,
+        .get("https://5582-2a09-5302-ffff-00-1ce6.eu.ngrok.io/change_status_aboniment/?id_employ=" + card.id,
           {
             headers: {
               "ngrok-skip-browser-warning": "69420"

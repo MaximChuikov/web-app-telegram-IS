@@ -39,7 +39,7 @@ export default {
     emp_id: Number,
   },
   beforeCreate() {
-    axios.get('https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/get_employee?id=' + this.emp_id, {
+    axios.get('https://5582-2a09-5302-ffff-00-1ce6.eu.ngrok.io/get_employee?id=' + this.emp_id, {
       headers: {
         "ngrok-skip-browser-warning": "69420"
       }
@@ -67,7 +67,7 @@ export default {
       this.$emit('setMainPage')
     },
     async deletePeople() {
-      await axios.delete('https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/?id=' + this.emp_id)
+      await axios.delete('https://5582-2a09-5302-ffff-00-1ce6.eu.ngrok.io/?id=' + this.emp_id)
     }
   }
 }
