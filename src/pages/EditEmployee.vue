@@ -3,7 +3,7 @@
   <button class="delete-button" @click="deletePeople">
     Удалить
   </button>
-  <PeopleCard click-handler="edit"
+  <PeopleCard click-handler="update"
               button-text="Сохранить изменения"
               :first_name=first_name
               :last_name=last_name
@@ -12,6 +12,7 @@
               :job=job
               :is_employee=is_employee
               :birth=birth
+              :emp_id=this.emp_id
               @setMainPage="getMainPage"
   />
 </template>

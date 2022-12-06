@@ -116,7 +116,6 @@ export default {
           document.getElementById("job").value = this.job;
         }
     )
-    //alert(this.dep_id)
   },
   methods: {
     setMainPage(){

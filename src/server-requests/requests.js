@@ -5,16 +5,13 @@ const server_url = 'https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/'
 class ServerRequests {
     async addPeople(last_name, first_name, mid_name, phone, job, birth, is_employee) {
         let url = server_url
-        url += `create_employee?`
-        url += `full_name=${
-            last_name + ' ' +
-            first_name + ' ' +
-            mid_name
-        }&`
-        url += `phone_number=${phone}&`
-        url += `department_name=${job}&`
-        url += `date_born=${birth}&`
-        url += `is_employee=${is_employee}`
+        url += 'create_employee?'
+        url += 'full_name=' + last_name + ' ' +first_name + ' ' + mid_name
+        url += '&phone_number=' + phone
+        url += '&department_name=Учебный центр'//+ job
+        url += '&date_born=' + birth
+        url += '&is_employee=' + is_employee
+        console.log(url)
         await axios.post(url)
             .then(() => {
                 alert('Человек добавлен')
@@ -24,17 +21,13 @@ class ServerRequests {
 
     async editPeople(emp_id, last_name, first_name, mid_name, phone, job, birth, is_employee) {
         let url = server_url
-        url += `change_employee?`
-        url += `id=${emp_id}&`
-        url += `full_name=${
-            last_name + ' ' +
-            first_name + ' ' +
-            mid_name
-        }&`
-        url += `phone_number=${phone}&`
-        url += `department_name=${job}&`
-        url += `date_born=${birth}&`
-        url += `is_employee=${is_employee}`
+        url += 'change_employee?'
+        url += 'id=' + emp_id
+        url += '&full_name=' + last_name + ' ' + first_name + ' ' + mid_name
+        url += '&phone_number=' + phone
+        url += '&department_name=Учебный центр'// + job
+        url += '&date_born=' + birth
+        url += '&is_employee=' + is_employee
         await axios.patch(url)
             .then(() => {
                 alert('Изменения сохранены')
@@ -44,7 +37,7 @@ class ServerRequests {
 
     async getEmployeesByDepId(id_departament) {
         let url = server_url
-        url += 'get_all_employees_on_id_departament'
+        url += 'get_all_employees_on_id_departament/'
         url += '?id_departament='
         url += id_departament
 
