@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server_url = 'https://0b21-185-233-200-96.eu.ngrok.io/'
+const server_url = 'https://c0b2-2a09-5302-ffff-00-1ce6.eu.ngrok.io/'
 
 class ServerRequests {
     async addPeople(last_name, first_name, mid_name, phone, job, birth, is_employee) {
@@ -18,7 +18,6 @@ class ServerRequests {
         await axios.post(url)
             .then(() => {
                 alert('Человек добавлен')
-                this.$emit('onClose')
             })
             .catch(() => alert('Ошибка'))
     }
@@ -39,7 +38,6 @@ class ServerRequests {
         await axios.patch(url)
             .then(() => {
                 alert('Изменения сохранены')
-                this.$emit('onClose')
             })
             .catch(() => alert('Ошибка'))
     }

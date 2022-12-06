@@ -73,7 +73,7 @@ export default {
   },
   mounted() { //TODO query
     axios
-        .get("https://0d79-185-233-200-96.eu.ngrok.io/get_all_employees_on_id_deportament/?id_deportament=8",
+        .get("https://c0b2-2a09-5302-ffff-00-1ce6.eu.ngrok.io/get_all_employees_on_id_deportament?id_deportament=8",
           {
             headers: {
               "ngrok-skip-browser-warning": "69420"
