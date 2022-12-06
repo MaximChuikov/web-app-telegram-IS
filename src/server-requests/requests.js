@@ -108,7 +108,7 @@ class ServerRequests {
             .then(e => e.data.result.map(e => {
                 return {
                     id: e.id,
-                    name: e.name
+                    name: e.departament_name
                 }
             }))
             .catch(() => [{name: 'Ошибка загрузки', id: 0}])

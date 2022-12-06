@@ -110,6 +110,7 @@ export default {
   beforeCreate() {
     Requests.getDepartments().then(
         e => {
+          console.log(e)
           this.departments = e
           document.getElementById("job").value = this.job;
         }
@@ -267,6 +268,7 @@ export default {
 .not-visible {
   color: transparent;
   transition: 1.3s;
+  background-color: white;
 }
 
 .not-visible::-webkit-calendar-picker-indicator {
@@ -370,6 +372,8 @@ export default {
   border: none;
   outline: none;
   scroll-behavior: smooth;
+  text-overflow: ellipsis;
+  background-color: white;
 }
 
 .reg-input:focus {
@@ -380,7 +384,6 @@ export default {
   border: 2px solid #afbdcf;
   border-radius: 5px;
 }
-
 
 .reg-button {
   margin-top: 20px;
