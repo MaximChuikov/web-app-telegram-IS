@@ -18,7 +18,7 @@
 
         <div class="input-container">
           <div class="input_wrap">
-            <select id="job" class="select">
+            <select id="job" class="selector">
               <option v-for="item in departments" :key="item.id">{{item.name}}</option>
             </select>
             <label>Отдел</label>
@@ -387,7 +387,7 @@ export default {
   border-radius: 10px;
   padding: 0 5px 0 5px;
 }
-select select {
+.selector {
   border: none;
   outline: none;
   scroll-behavior: smooth;
