@@ -1,5 +1,5 @@
 <template>
-  <a v-bind:href="link" class="block-link-a">
+  <div class="block-link-a">
     <img v-bind:src="avatar"
          class="avatar"
          alt="Фото">
@@ -7,14 +7,13 @@
     <img src="https://kopeysk.is74.ru/oldsite/business/assets/img/arrow.png"
          class="arrow"
          alt=">">
-  </a>
+  </div>
 </template>
 
 <script>
 export default {
   name: "BlockLink",
   props: {
-    link: String,
     text: String,
     avatar: String
   }

@@ -45,7 +45,7 @@ export default {
       this.$emit('changeStatus', card);
     },
     redirectEdit(id) {
-      this.$router.push('/edit/' + id)
+      this.$emit('changeEmp', id)
     }
   }
 }

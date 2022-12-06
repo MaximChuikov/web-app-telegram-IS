@@ -58,7 +58,7 @@
 
 <script>
 import Requests from "@/server-requests/requests";
-import {dep_id} from "@/main";
+//import {dep_id} from "@/main";
 
 export default {
   name: "PeopleCard",
@@ -102,6 +102,7 @@ export default {
   },
   data() {
     return {
+      dep_id: Number,
       isEmployee: this.is_employee,
       departments: [
         {name: 'Загрузка', id: 1}
@@ -111,14 +112,19 @@ export default {
   beforeCreate() {
     Requests.getDepartments().then(
         e => {
-          console.log(e)
           this.departments = e
           document.getElementById("job").value = this.job;
         }
     )
-    alert(dep_id)
+    //alert(this.dep_id)
   },
   methods: {
+    setMainPage(){
+      this.$emit('setMainPage')
+    },
+    mounted(){
+      this.dep_id = window.location.href.split('?')[1].split('=')[1]
+    },
     changePeople() {
       this.isEmployee = !this.isEmployee
     },
@@ -132,7 +138,7 @@ export default {
           document.getElementById('job').value,
           document.getElementById('birth').value,
           this.isEmployee
-      ).then(() => this.$router.push('/'))
+      ).then(() => this.setMainPage())
     },
     addPeople() {
       Requests.addPeople(
@@ -143,7 +149,7 @@ export default {
           document.getElementById('job').value,
           document.getElementById('birth').value,
           this.isEmployee
-      ).then(() => this.$router.push('/'))
+      ).then(() => this.setMainPage())
     },
     async handler() {
       if (this.clickHandler === "post") {

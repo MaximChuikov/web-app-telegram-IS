@@ -2,24 +2,17 @@
   <BlockLink text="Добавить"
              class="add-btn"
              avatar="https://kopeysk.is74.ru/oldsite/abonents/img/icon_job2.png"
-             link="reg"/>
+             @click="redirectReg()"/>
   <CardList
       v-if="filteredData.length==0"
       @changeStatus="changeStatus"
+      @changeEmp="changeEmp"
       v-bind:cards="cards"/>
   <CardList
       v-else
       @changeStatus="changeStatus"
+      @changeEmp="changeEmp"
       v-bind:cards="filteredData"/>
-  <!-- <div class="personal-data">
-    <h5>WebAppInitData</h5>
-    <div>user: {{window.Telegram.WebApp.WebAppInitData.user}}</div>
-
-    <h5>WebAppUser</h5>
-    <div>id: {{window.Telegram.WebApp.WebAppUser.id}}</div>
-    <div>first_name: {{window.Telegram.WebApp.WebAppUser.first_name}}</div>
-    <div>photo_url: {{window.Telegram.WebApp.WebAppUser.photo_url}}</div>
-  </div> -->
   <div class="container">
     <SearchInputVue class="input" @changeInputText="filter" text="Фильтр по ФИО"></SearchInputVue>
   </div>
@@ -37,18 +30,28 @@ export default {
     BlockLink,
     CardList,
   },
+  // props:{
+  //   depID: {type: Number},
+  // },
   data() {
     return {
       editShow: true,
       cards: [],
-      filteredData: []
+      filteredData: [],
+      depID: Number,
     }
   },
   methods: {
+    redirectReg(){
+      this.$emit('setRegPage')
+    },
+    changeEmp(id) {
+      this.$emit('changeEmp', id)
+    },
     changeStatus(card) {
       console.log(card);
       axios
-        .get("https://c0b2-2a09-5302-ffff-00-1ce6.eu.ngrok.io/change_status_aboniment/?id_employ=" + card.id,
+        .get("https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/change_status_aboniment/?id_employ=" + card.id,
           {
             headers: {
               "ngrok-skip-browser-warning": "69420"
@@ -73,7 +76,9 @@ export default {
     },
   },
   mounted() { //TODO query
-    Requests.getEmployeesByDepId(this.$route.query.id).then(
+    console.log(window.location.href.split('?')[1].split('=')[1])
+    this.depID = window.location.href.split('?')[1].split('=')[1]
+    Requests.getEmployeesByDepId(this.depID).then(
         e => {
           this.cards = e
         }

@@ -1,5 +1,5 @@
 <template>
-  <img class="close-button" @click="this.$router.go(-1)" :src="require('../assets/images/cross.png')" alt="Х"/>
+  <img class="close-button" @click="getMainPage" :src="require('../assets/images/cross.png')" alt="Х"/>
   <button class="delete-button" @click="deletePeople">
     Удалить
   </button>
@@ -12,6 +12,7 @@
               :job=job
               :is_employee=is_employee
               :birth=birth
+              @setMainPage="getMainPage"
   />
 </template>
 
@@ -31,13 +32,13 @@ export default {
       job: 0,
       is_employee: "",
       birth: "",
-      emp_id: ""
     }
   },
-  props: {},
+  props: {
+    emp_id: Number,
+  },
   beforeCreate() {
-    this.emp_id = this.$route.params.emp_id;
-    axios.get(`https://0b21-185-233-200-96.eu.ngrok.io/get_employee?id=${this.emp_id}`, {
+    axios.get('https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/get_employee?id=' + this.emp_id, {
       headers: {
         "ngrok-skip-browser-warning": "69420"
       }
@@ -57,12 +58,15 @@ export default {
         .catch(e => {
           console.log(e)
           alert("Ошибка " + e.message)
-          this.$router.push({name: 'home', params: {}})
+          this.getMainPage()
         })
   },
   methods: {
+    getMainPage(){
+      this.$emit('setMainPage')
+    },
     async deletePeople() {
-      await axios.delete(`https://0b21-185-233-200-96.eu.ngrok.io?id=${this.emp_id}`)
+      await axios.delete('https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/?id=' + this.emp_id)
     }
   }
 }

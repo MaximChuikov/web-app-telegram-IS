@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server_url = 'https://c0b2-2a09-5302-ffff-00-1ce6.eu.ngrok.io/'
+const server_url = 'https://7c5c-2a09-5302-ffff-00-1ce6.eu.ngrok.io/'
 
 class ServerRequests {
     async addPeople(last_name, first_name, mid_name, phone, job, birth, is_employee) {
