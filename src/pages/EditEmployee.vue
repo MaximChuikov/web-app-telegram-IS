@@ -45,7 +45,6 @@ export default {
       }
     })
         .then(e => {
-          console.log(e)
           const employee = e.data.result
           const name = employee.full_name.split(' ')
           this.first_name = name[1]

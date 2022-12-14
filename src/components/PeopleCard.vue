@@ -134,7 +134,7 @@ export default {
           document.getElementById('first_name').value,
           document.getElementById('mid_name').value,
           document.getElementById('phone').value,
-          document.getElementById('job').value,
+          this.departments.find(dep => dep.name === document.getElementById('job').value).id,
           document.getElementById('birth').value,
           this.isEmployee
       ).then(() => this.setMainPage())
@@ -145,7 +145,7 @@ export default {
           document.getElementById('first_name').value,
           document.getElementById('mid_name').value,
           document.getElementById('phone').value,
-          document.getElementById('job').value,
+          this.departments.find(dep => dep.name === document.getElementById('job').value).id,
           document.getElementById('birth').value,
           this.isEmployee
       ).then(() => this.setMainPage())
