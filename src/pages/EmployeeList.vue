@@ -26,6 +26,7 @@ import Requests from "@/server-requests/requests";
 
 export default {
   name: 'App',
+  emits: ['changeEmp', 'setRegPage'],
   components: {
     BlockLink,
     CardList,

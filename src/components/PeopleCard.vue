@@ -18,8 +18,8 @@
 
         <div class="input-container">
           <div class="input_wrap">
-            <select id="job" class="selector">
-              <option v-for="item in departments" :key="item.id">{{ item.name }}</option>
+            <select id="job" class="selector"  v-model="selected">
+              <option v-for="item in departments" :value="item.name" :key="item.id">{{ item.name }}</option>
             </select>
             <label>Отдел</label>
           </div>
@@ -103,6 +103,7 @@ export default {
   data() {
     return {
       dep_id: Number,
+      selected: '',
       isEmployee: this.is_employee,
       departments: [
         {name: 'Загрузка', id: 1}
@@ -114,15 +115,14 @@ export default {
         e => {
           this.departments = e
           document.getElementById("job").value = this.job;
+          this.dep_id = window.location.href.split('?')[1].split('=')[1]
+          this.selected = e.find(dep => dep.id == this.dep_id).name
         }
-    )
+    );
   },
   methods: {
     setMainPage(){
       this.$emit('setMainPage')
-    },
-    mounted(){
-      this.dep_id = window.location.href.split('?')[1].split('=')[1]
     },
     changePeople() {
       this.isEmployee = !this.isEmployee

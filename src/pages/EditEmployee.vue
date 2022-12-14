@@ -24,6 +24,7 @@ import Requests from "@/server-requests/requests";
 
 export default {
   name: "EditEmployee",
+  emits: ['setMainPage'],
   components: {PeopleCard},
   data() {
     return {

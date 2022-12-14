@@ -11,6 +11,7 @@ import PeopleCard from "@/components/PeopleCard";
 
 export default {
   name: "RegistrationPage",
+  emits: ['setMainPage'],
   components: {
     PeopleCard
   },
