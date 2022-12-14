@@ -8,7 +8,8 @@ class ServerRequests {
         url += 'create_employee?'
         url += 'full_name=' + last_name + ' ' +first_name + ' ' + mid_name
         url += '&phone_number=' + phone
-        url += '&department_name=Учебный центр'//+ job
+        url += '&department_id=' + job //Учебный центр'
+        console.log(job)
         url += '&date_born=' + birth
         url += '&is_employee=' + is_employee
         console.log(url)
@@ -25,7 +26,7 @@ class ServerRequests {
         url += 'id=' + emp_id
         url += '&full_name=' + last_name + ' ' + first_name + ' ' + mid_name
         url += '&phone_number=' + phone
-        url += '&department_name=Учебный центр'// + job
+        url += '&department_id=' + job //Учебный центр
         url += '&date_born=' + birth
         url += '&is_employee=' + is_employee
         await axios.patch(url)
