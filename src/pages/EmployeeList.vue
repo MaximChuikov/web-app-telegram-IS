@@ -30,9 +30,6 @@ export default {
     BlockLink,
     CardList,
   },
-  // props:{
-  //   depID: {type: Number},
-  // },
   data() {
     return {
       editShow: true,
@@ -90,6 +87,8 @@ export default {
 <style>
 .add-btn {
   margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
 }
 
 .container {

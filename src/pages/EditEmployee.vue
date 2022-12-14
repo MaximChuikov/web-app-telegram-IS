@@ -20,6 +20,7 @@
 <script>
 import PeopleCard from "@/components/PeopleCard";
 import axios from "axios";
+import Requests from "@/server-requests/requests";
 
 export default {
   name: "EditEmployee",
@@ -66,7 +67,7 @@ export default {
       this.$emit('setMainPage')
     },
     async deletePeople() {
-      await axios.delete('https://5582-2a09-5302-ffff-00-1ce6.eu.ngrok.io/?id=' + this.emp_id)
+      Requests.deletePeople(this.emp_id).then(() => this.getMainPage())
     }
   }
 }

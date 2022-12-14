@@ -8,7 +8,7 @@ class ServerRequests {
         url += 'create_employee?'
         url += 'full_name=' + last_name + ' ' +first_name + ' ' + mid_name
         url += '&phone_number=' + phone
-        url += '&department_id=' + job //Учебный центр'
+        url += '&department_id=' + job
         console.log(job)
         url += '&date_born=' + birth
         url += '&is_employee=' + is_employee
@@ -26,12 +26,34 @@ class ServerRequests {
         url += 'id=' + emp_id
         url += '&full_name=' + last_name + ' ' + first_name + ' ' + mid_name
         url += '&phone_number=' + phone
-        url += '&department_id=' + job //Учебный центр
+        url += '&department_id=' + job
         url += '&date_born=' + birth
         url += '&is_employee=' + is_employee
         await axios.patch(url)
             .then(() => {
                 alert('Изменения сохранены')
+            })
+            .catch(() => alert('Ошибка'))
+    }
+
+    async deletePeople(emp_id) {
+        let url = server_url
+        url += 'delete_employee?'
+        url += 'id=' + emp_id
+        await axios.delete(url)
+            .then(() => {
+                //
+            })
+            .catch(() => alert('Ошибка'))
+    }
+
+    async changeStatus(emp_id) {
+        let url = server_url
+        url += 'change_status_aboniment?'
+        url += 'id_employ=' + emp_id
+        await axios.get(url)
+            .then(() => {
+                //
             })
             .catch(() => alert('Ошибка'))
     }

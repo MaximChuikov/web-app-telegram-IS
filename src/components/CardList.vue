@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <div class="card" v-for="card in cards" v-bind:key="card.id">
       <div class="card__info">
         <p class="card__name">{{ card.full_name }}</p>
