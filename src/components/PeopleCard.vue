@@ -117,6 +117,7 @@ export default {
           document.getElementById("job").value = this.job;
           this.dep_id = window.location.href.split('?')[1].split('=')[1]
           this.selected = this.dep_id
+          alert(window.location.href.split('?')[1].split('=')[1] + '  +  ' + this.selected);
         }
     );
   },
