@@ -19,7 +19,7 @@
         <div class="input-container">
           <div class="input_wrap">
             <select id="job" class="selector"  v-model="selected">
-              <option v-for="item in departments" :value="item.name" :key="item.id">{{ item.name }}</option>
+              <option v-for="item in departments" :value="item.id" :key="item.id">{{ item.name }}</option>
             </select>
             <label>Отдел</label>
           </div>
@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       dep_id: Number,
-      selected: '',
+      selected: Number,
       isEmployee: this.is_employee,
       departments: [
         {name: 'Загрузка', id: 1}
@@ -116,7 +116,7 @@ export default {
           this.departments = e
           document.getElementById("job").value = this.job;
           this.dep_id = window.location.href.split('?')[1].split('=')[1]
-          this.selected = e.find(dep => dep.id == this.dep_id).name
+          this.selected = this.dep_id
         }
     );
   },
@@ -134,7 +134,7 @@ export default {
           document.getElementById('first_name').value,
           document.getElementById('mid_name').value,
           document.getElementById('phone').value,
-          this.departments.find(dep => dep.name === document.getElementById('job').value).id,
+          document.getElementById('job').value,
           document.getElementById('birth').value,
           this.isEmployee
       ).then(() => this.setMainPage())
@@ -145,7 +145,7 @@ export default {
           document.getElementById('first_name').value,
           document.getElementById('mid_name').value,
           document.getElementById('phone').value,
-          this.departments.find(dep => dep.name === document.getElementById('job').value).id,
+          document.getElementById('job').value,
           document.getElementById('birth').value,
           this.isEmployee
       ).then(() => this.setMainPage())
