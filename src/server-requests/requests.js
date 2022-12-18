@@ -10,8 +10,8 @@ class ServerRequests {
         url += 'full_name=' + last_name + ' ' +first_name + ' ' + mid_name
         url += '&phone_number=' + phone
         url += '&department_id=' + job
-        console.log(job)
         url += '&date_born=' + birth
+        url += '&date_start_aboniment=' + reg_date
         url += '&is_employee=' + is_employee
         console.log(url)
         console.log(reg_date)
@@ -79,7 +79,8 @@ class ServerRequests {
                     id: e.id,
                     department_id: e.department_id,
                     phone_number: e.phone_number,
-                    abonnement_status: e.abonnement_status
+                    abonnement_status: e.abonnement_status,
+                    is_employee: e.is_employee
                 }
             }))
             .catch(() => [{

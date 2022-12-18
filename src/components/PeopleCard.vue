@@ -18,10 +18,12 @@
             <label>Отдел</label>
           </div>
           <div class="input_wrap">
-            <input type="tel" id="phone" required
+            <input type="tel"
+                   required
+                   v-bind:value=input_phone
+                   @input="input_phone = $event.target.value"
                    pattern="89[\d]{9}" class="reg-input"
                    placeholder=" "
-                   v-bind:value=input_phone
                    title="Телефон начинается с 8 и без различных знаков. Например, 89000111222">
             <label>Номер телефона</label>
           </div>
@@ -151,7 +153,7 @@ export default {
           this.selected = this.dep_id
           
           const today = new Date();
-          const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+          const mm = String(today.getMonth() + 1).padStart(2, '0');
           const yyyy = today.getFullYear()
           this.input_reg_date = '01.' + mm + '.' + yyyy;
         }
@@ -169,7 +171,7 @@ export default {
           this.input_first_name,
           this.input_mid_name,
           this.input_phone,
-          this.input_job,
+          this.selected,
           this.input_birth,
           this.input_is_employee
       ).then(() => this.setMainPage())
@@ -180,7 +182,7 @@ export default {
           this.input_first_name,
           this.input_mid_name,
           this.input_phone,
-          this.input_job,
+          this.selected,
           this.input_birth,
           this.input_is_employee,
           this.input_reg_date
