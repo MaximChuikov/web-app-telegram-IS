@@ -6,9 +6,8 @@
       </button>
       <img class="close-button" @click="setMainPage" :src="require('../assets/images/cross.png')" alt="Х"/>
 
-      <img src="https://kopeysk.is74.ru/oldsite/abonents/img/logo_white.jpg"
+      <img src="../assets/images/logo.png"
            class="logo" alt="Интерсвязь, твой шаг в будущее"/>
-      <p class="reg-p">Необходимо ввести данные</p>
       <form>
 
         <div class="input-container">
@@ -22,29 +21,54 @@
             <input type="tel" id="phone" required
                    pattern="89[\d]{9}" class="reg-input"
                    placeholder=" "
-                   v-bind:value=phone
+                   v-bind:value=input_phone
                    title="Телефон начинается с 8 и без различных знаков. Например, 89000111222">
             <label>Номер телефона</label>
           </div>
           <div class="input_wrap">
-            <input type="text" id="last_name" v-bind:value=last_name class="reg-input" required>
+            <input type="text"
+                  v-bind:value=input_last_name
+                  @input="input_last_name = $event.target.value"
+                  class="reg-input" required>
             <label>Фамилия</label>
           </div>
           <div class="input_wrap">
-            <input type="text" class="reg-input" v-bind:value=first_name id="first_name" required>
+            <input type="text"
+                  class="reg-input"
+                  v-bind:value=input_first_name
+                  @input="input_first_name = $event.target.value"
+                  required>
             <label>Имя</label>
           </div>
           <div class="input_wrap">
-            <input type="text" class="reg-input" v-bind:value=mid_name id="mid_name" required>
+            <input type="text"
+                  class="reg-input"
+                  v-bind:value=input_mid_name
+                  @input="input_mid_name = $event.target.value"
+                  required>
             <label>Отчество</label>
           </div>
           <div class="input_wrap">
-            <input class="not-visible reg-input" v-bind:value=birth type="date" id="birth" required>
-            <label class="upped-label">Дата рождения</label>
+            <input class="not-visible reg-input"
+                  v-bind:value=input_birth
+                  @input="input_birth = $event.target.value"
+                  type="text"
+                  required>
+            <label class="upped-label">Дата рождения: дд.мм.гггг</label>
+          </div>
+          <div class="input_wrap" v-if="clickHandler === 'post'">
+            <input class="not-visible reg-input"
+                  v-bind:value=input_reg_date
+                  @input="input_reg_date = $event.target.value"
+                  type="text"
+                  required>
+            <label class="upped-label">Абонемент действует с: дд.мм.гггг</label>
           </div>
           <div class="input_wrap display-row last_wrap">
-            <input v-model="isEmployee" type="checkbox" class="emp_checkbox"/>
-            <p v-bind:class="{active: isEmployee}">Сотрудник</p>
+            <input v-model="input_is_employee"
+                  type="checkbox"
+                  class="emp_checkbox"/>
+            <p v-bind:class="{active: input_is_employee}">Сотрудник</p>
           </div>
         </div>
         <button type="button" class="reg-button" @click="handler">{{ buttonText }}</button>
@@ -100,23 +124,39 @@ export default {
   },
   data() {
     return {
+      input_job: this.job,
+      input_first_name: this.first_name,
+      input_last_name: this.last_name,
+      input_mid_name: this.mid_name,
+      input_phone: this.phone,
+      input_birth: this.birth,
+      input_is_employee: this.is_employee,
+      input_emp_id: this.emp_id,
+
+      input_reg_date: '',
       dep_id: Number,
       selected: Number,
-      isEmployee: this.is_employee,
       departments: [
         {name: 'Загрузка', id: 1}
       ]
     }
   },
   beforeCreate() {
+    console.log('hello')
     Requests.getDepartments().then(
         e => {
           this.departments = e
           document.getElementById("job").value = this.job;
           this.dep_id = window.location.href.split('?')[1].split('=')[1].match(/\d/g).join("") 
           this.selected = this.dep_id
+          
+          const today = new Date();
+          const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+          const yyyy = today.getFullYear()
+          this.input_reg_date = '01.' + mm + '.' + yyyy;
         }
     );
+    console.log(this.input_reg_date)
   },
   methods: {
     setMainPage(){
@@ -125,24 +165,25 @@ export default {
     editPeople() {
       Requests.editPeople(
           this.emp_id,
-          document.getElementById('last_name').value,
-          document.getElementById('first_name').value,
-          document.getElementById('mid_name').value,
-          document.getElementById('phone').value,
-          document.getElementById('job').value,
-          document.getElementById('birth').value,
-          this.isEmployee
+          this.input_last_name,
+          this.input_first_name,
+          this.input_mid_name,
+          this.input_phone,
+          this.input_job,
+          this.input_birth,
+          this.input_is_employee
       ).then(() => this.setMainPage())
     },
     addPeople() {
       Requests.addPeople(
-          document.getElementById('last_name').value,
-          document.getElementById('first_name').value,
-          document.getElementById('mid_name').value,
-          document.getElementById('phone').value,
-          document.getElementById('job').value,
-          document.getElementById('birth').value,
-          this.isEmployee
+          this.input_last_name,
+          this.input_first_name,
+          this.input_mid_name,
+          this.input_phone,
+          this.input_job,
+          this.input_birth,
+          this.input_is_employee,
+          this.input_reg_date
       ).then(() => this.setMainPage())
     },
     async handler() {
@@ -224,18 +265,6 @@ export default {
   box-shadow: 0 0 3px #000;
 }
 
-.main-card:before {
-  content: "";
-  display: block;
-  width: 70px;
-  height: 4px;
-  background: #4E535B;
-  border-radius: 5px;
-  border-bottom: 1px solid #FFFFFF;
-  border-top: 2px solid #CBCBCD;
-  margin: 0 auto;
-}
-
 .close-button {
   position: absolute;
   cursor: pointer;
@@ -265,12 +294,9 @@ export default {
   background-color: #7c0b0b;
 }
 
-.reg-p {
-  font-family: 'Open Sans', Arial, sans-serif;
-  font-weight: 300;
-  color: #7B808A;
-  margin-top: 0;
-  margin-bottom: 30px;
+.logo{
+  width:50px;
+  transform: translateY(-10px);
 }
 
 .emp_checkbox{
@@ -416,12 +442,13 @@ export default {
 }
 
 .input-container {
+  transform: translateY(-10px);
   border: 2px solid #afbdcf;
   border-radius: 5px;
 }
 
 .reg-button {
-  margin-top: 20px;
+  margin-top: 5px;
   display: block;
   width: 100%;
   line-height: 2em;
@@ -435,7 +462,7 @@ export default {
   box-shadow: 0 0 0 1px var(--blue-color), 0 2px 2px #808389;
   color: #FFFFFF;
   font-size: 1.5em;
-  transition: background 0.6s;
+  transition: all 0.6s;
 }
 
 button:hover {

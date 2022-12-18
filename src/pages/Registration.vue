@@ -1,7 +1,6 @@
 <template>
   <PeopleCard click-handler="post"
               button-text="Добавить"
-              @onClose="goBack"
               @setMainPage="getMainPage"/>
 </template>
 

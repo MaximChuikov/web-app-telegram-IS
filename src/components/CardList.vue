@@ -65,11 +65,12 @@ export default {
 }
 
 .card {
+  height: 100px;
   display: flex;
   justify-content: space-between;
   position: relative;
   border-radius: 3px;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
   margin: 8px 0;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -119,7 +120,7 @@ export default {
 
 .isEmp{
   position: absolute;
-  right: 7px;
+  right: 10px;
   bottom: -7px;
 }
 </style>

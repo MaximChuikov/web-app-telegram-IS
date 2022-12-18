@@ -3,7 +3,8 @@ import axios from "axios";
 const server_url = 'https://5582-2a09-5302-ffff-00-1ce6.eu.ngrok.io/'
 
 class ServerRequests {
-    async addPeople(last_name, first_name, mid_name, phone, job, birth, is_employee) {
+    async addPeople(last_name, first_name, mid_name, phone, job, birth, is_employee,
+                    reg_date) {
         let url = server_url
         url += 'create_employee?'
         url += 'full_name=' + last_name + ' ' +first_name + ' ' + mid_name
@@ -13,6 +14,7 @@ class ServerRequests {
         url += '&date_born=' + birth
         url += '&is_employee=' + is_employee
         console.log(url)
+        console.log(reg_date)
         await axios.post(url)
             .then(() => {
                 alert('Человек добавлен')
