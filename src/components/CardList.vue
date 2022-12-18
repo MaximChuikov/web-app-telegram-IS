@@ -4,23 +4,24 @@
       <div class="card__info">
         <p class="card__name">{{ card.full_name }}</p>
         <p class="card__phone">{{ card.phone_number }}</p>
-
-        <img class="edit-button" @click="redirectEdit(card.id)" :src="require('../assets/images/edit.png')"/>
       </div>
       <div class="card__actions">
+        <img class="edit-button" @click="redirectEdit(card.id)" :src="require('../assets/images/editWhite.png')"/>
         <div class="card__status" :rel="card.abonnement_status ? 'yes' : 'no'">
           <div class="card__status-center"></div>
         </div>
         <BasicButtonVue
-            class="card__btn"
             v-on:click="changeStatus(card)" v-if="card.abonnement_status">
           Отменить<br/> абонемент
         </BasicButtonVue>
         <BasicButtonVue
-            class="card__btn"
             v-on:click="changeStatus(card)" v-else>
           Добавить<br/> абонемент
         </BasicButtonVue>
+      </div>
+      <div class="isEmp">
+        <p v-if="card.is_employee">Сотрудник</p>
+        <p v-else>Родственник</p>
       </div>
     </div>
   </div>
@@ -53,14 +54,14 @@ export default {
 
 <style scoped>
 .edit-button {
-  background-color: #2cc411;
+  background: var(--blue-gradient);
   border-radius: 8px;
   width: 30px;
   height: 30px;
   color: white;
   border: none;
   cursor: pointer;
-  box-shadow: #aae85e 0 0 3px;
+  box-shadow: #00000000 0 0 3px;
 }
 
 .card {
@@ -114,5 +115,11 @@ export default {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.isEmp{
+  position: absolute;
+  right: 7px;
+  bottom: -7px;
 }
 </style>

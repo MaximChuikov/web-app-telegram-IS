@@ -1,18 +1,13 @@
 <template>
   <div class="flex-center-container">
-    <div class="ribbon"></div>
     <div class="main-card">
+      <button v-if="clickHandler === 'update'" class="delete-button" @click="deletePeople">
+        Удалить
+      </button>
+      <img class="close-button" @click="setMainPage" :src="require('../assets/images/cross.png')" alt="Х"/>
 
       <img src="https://kopeysk.is74.ru/oldsite/abonents/img/logo_white.jpg"
            class="logo" alt="Интерсвязь, твой шаг в будущее"/>
-      <div class="display-row">
-        <h1 v-if="isEmployee" class="reg-h1">Cотрудник</h1>
-        <h1 v-else class="reg-h1">Родственник</h1>
-        <img class="change-people-button"
-             src="https://kopeysk.is74.ru/oldsite/business/assets/img/arrow.png"
-             @click="changePeople" alt=">">
-      </div>
-
       <p class="reg-p">Необходимо ввести данные</p>
       <form>
 
@@ -43,11 +38,14 @@
             <input type="text" class="reg-input" v-bind:value=mid_name id="mid_name" required>
             <label>Отчество</label>
           </div>
-          <div class="input_wrap last_wrap">
+          <div class="input_wrap">
             <input class="not-visible reg-input" v-bind:value=birth type="date" id="birth" required>
             <label class="upped-label">Дата рождения</label>
           </div>
-
+          <div class="input_wrap display-row last_wrap">
+            <input v-model="isEmployee" type="checkbox" class="emp_checkbox"/>
+            <p v-bind:class="{active: isEmployee}">Сотрудник</p>
+          </div>
         </div>
         <button type="button" class="reg-button" @click="handler">{{ buttonText }}</button>
       </form>
@@ -124,9 +122,6 @@ export default {
     setMainPage(){
       this.$emit('setMainPage')
     },
-    changePeople() {
-      this.isEmployee = !this.isEmployee
-    },
     editPeople() {
       Requests.editPeople(
           this.emp_id,
@@ -156,7 +151,10 @@ export default {
       } else if (this.clickHandler === "update") {
         await this.editPeople()
       }
-    }
+    },
+    async deletePeople() {
+      Requests.deletePeople(this.emp_id).then(() => this.setMainPage())
+    },
   }
 }
 </script>
@@ -174,10 +172,6 @@ export default {
 .display-row {
   display: flex;
   flex-direction: row;
-}
-
-.display-row > h1 {
-  margin: 0 auto;
 }
 
 .change-people-button {
@@ -218,6 +212,7 @@ export default {
 }
 
 .main-card {
+  position: relative;
   background: #FFF;
   border-bottom: 2px solid #C5C5C8;
   border-radius: 5px;
@@ -241,9 +236,33 @@ export default {
   margin: 0 auto;
 }
 
-.reg-h1 {
-  font-size: 1.6em;
-  margin: 3px 0 10px 0;
+.close-button {
+  position: absolute;
+  cursor: pointer;
+  right: 5px;
+  top: 5px;
+  padding: 16px;
+  width: 16px;
+  height: 16px;
+  z-index: 3;
+}
+
+.delete-button {
+  background-color: #c41111;
+  position: absolute;
+  left: 5px;
+  top: 21px;
+  border-radius: 4px;
+  font-size: 18px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: #a66744 0 0 10px;
+  transition: 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #7c0b0b;
 }
 
 .reg-p {
@@ -252,6 +271,10 @@ export default {
   color: #7B808A;
   margin-top: 0;
   margin-bottom: 30px;
+}
+
+.emp_checkbox{
+  width: 25px;
 }
 
 .reg-input, .input_wrap select {
@@ -282,6 +305,11 @@ export default {
   filter: invert(1);
   transition: 0.2s;
 
+}
+
+.active{
+  color: #000;
+  font-weight: bold;
 }
 
 .not-visible:focus::-webkit-calendar-picker-indicator,

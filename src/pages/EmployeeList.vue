@@ -79,6 +79,7 @@ export default {
     Requests.getEmployeesByDepId(this.depID).then(
         e => {
           this.cards = e
+          console.log(e)
         }
     )
   }

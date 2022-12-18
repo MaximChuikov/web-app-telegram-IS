@@ -1,8 +1,4 @@
 <template>
-  <img class="close-button" @click="getMainPage" :src="require('../assets/images/cross.png')" alt="Х"/>
-  <button class="delete-button" @click="deletePeople">
-    Удалить
-  </button>
   <PeopleCard click-handler="update"
               button-text="Сохранить изменения"
               :first_name=first_name
@@ -13,14 +9,13 @@
               :is_employee=is_employee
               :birth=birth
               :emp_id=this.emp_id
-              @setMainPage="getMainPage"
+              @setMainPage="setMainPage"
   />
 </template>
 
 <script>
 import PeopleCard from "@/components/PeopleCard";
 import axios from "axios";
-import Requests from "@/server-requests/requests";
 
 export default {
   name: "EditEmployee",
@@ -64,27 +59,14 @@ export default {
         })
   },
   methods: {
-    getMainPage(){
+    setMainPage(){
       this.$emit('setMainPage')
     },
-    async deletePeople() {
-      Requests.deletePeople(this.emp_id).then(() => this.getMainPage())
-    }
   }
 }
 </script>
 
 <style scoped>
-.close-button {
-  position: absolute;
-  cursor: pointer;
-  right: 8px;
-  top: 8px;
-  padding: 16px;
-  width: 16px;
-  height: 16px;
-  z-index: 3;
-}
 
 .b-popup {
   display: flex;
@@ -103,23 +85,5 @@ export default {
 .b-popup .b-popup-content {
   z-index: 2;
   overflow-y: visible;
-}
-
-.delete-button {
-  background-color: #c41111;
-  position: fixed;
-  left: 15px;
-  top: 21px;
-  border-radius: 4px;
-  font-size: 18px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  box-shadow: #a66744 0 0 10px;
-  transition: 0.3s;
-}
-
-.delete-button:hover {
-  background-color: #7c0b0b;
 }
 </style>
