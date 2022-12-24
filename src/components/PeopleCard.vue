@@ -149,7 +149,7 @@ export default {
         e => {
           this.departments = e
           document.getElementById("job").value = this.job;
-          this.dep_id = window.location.href.split('?')[1].split('=')[1].match(/\d/g).join("") 
+          this.dep_id = window.location.href.split('?')[1].split('=')[1].split('#')[0] //.match(/\d/g).join("") 
           this.selected = this.dep_id
           
           const today = new Date();

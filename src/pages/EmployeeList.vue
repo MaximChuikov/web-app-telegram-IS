@@ -74,13 +74,13 @@ export default {
     },
   },
   mounted() { //TODO query
-    console.log(window.location.href.split('?')[1].split('=')[1])
-    this.depID = window.location.href.split('?')[1].split('=')[1]
+    console.log(window.location.href.split('?')[1].split('=')[1]).split('#')[0]
+    this.depID = window.location.href.split('?')[1].split('=')[1].split('#')[0]
     Requests.getEmployeesByDepId(this.depID).then(
         e => {
           this.cards = e
           console.log(e)
-          alert(window.location.href.split('?')[1].split('=')[1])
+          alert(window.location.href.split('?')[1].split('=')[1]).split('#')[0];
         }
     )
   }
