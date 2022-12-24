@@ -80,7 +80,7 @@ export default {
         e => {
           this.cards = e
           console.log(e)
-          alert('before: ', window.location.href, '  after: ', window.location.href.split('?')[1].split('=')[1].split('#')[0]);
+          alert('before: ' + window.location.href + '  after: ' + window.location.href.split('?')[1].split('=')[1].split('#')[0]);
         }
     )
   }
