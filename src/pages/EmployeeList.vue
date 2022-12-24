@@ -36,7 +36,7 @@ export default {
       editShow: true,
       cards: [],
       filteredData: [],
-      depID: Number,
+      depID: String,
     }
   },
   methods: {
@@ -77,8 +77,7 @@ export default {
     //console.log(window.location.href.split('?')[1].split('=')[1].split('#')[0])
     var url = new URL(window.location.href);
     var id = url.searchParams.get("id");
-    alert(id);
-    this.depID = window.location.href.split('?')[1].split('=')[1].split('#')[0]
+    this.depID = id
     Requests.getEmployeesByDepId(this.depID).then(
         e => {
           this.cards = e
