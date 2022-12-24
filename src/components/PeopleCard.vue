@@ -12,7 +12,7 @@
 
         <div class="input-container">
           <div class="input_wrap">
-            <select id="job" class="selector"  v-model="selected">
+            <select id="job" class="selector" v-model="selected">
               <option v-for="item in departments" :value="item.id" :key="item.id">{{ item.name }}</option>
             </select>
             <label>Отдел</label>
@@ -29,47 +29,56 @@
           </div>
           <div class="input_wrap">
             <input type="text"
-                  v-bind:value=input_last_name
-                  @input="input_last_name = $event.target.value"
-                  class="reg-input" required>
+                   v-bind:value=input_last_name
+                   @input="input_last_name = $event.target.value"
+                   title="Фамилия"
+                   class="reg-input" required>
             <label>Фамилия</label>
           </div>
           <div class="input_wrap">
             <input type="text"
-                  class="reg-input"
-                  v-bind:value=input_first_name
-                  @input="input_first_name = $event.target.value"
-                  required>
+                   class="reg-input"
+                   v-bind:value=input_first_name
+                   @input="input_first_name = $event.target.value"
+                   title="Имя"
+                   required>
             <label>Имя</label>
           </div>
           <div class="input_wrap">
             <input type="text"
-                  class="reg-input"
-                  v-bind:value=input_mid_name
-                  @input="input_mid_name = $event.target.value"
-                  required>
+                   class="reg-input"
+                   v-bind:value=input_mid_name
+                   @input="input_mid_name = $event.target.value"
+                   title="Отчество"
+                   required>
             <label>Отчество</label>
           </div>
           <div class="input_wrap">
-            <input class="not-visible reg-input"
-                  v-bind:value=input_birth
-                  @input="input_birth = $event.target.value"
-                  type="text"
-                  required>
-            <label class="upped-label">Дата рождения: дд.мм.гггг</label>
+            <input class="reg-input need-show-error"
+                   v-bind:value=input_birth
+                   @input="input_birth = $event.target.value"
+                   type="text"
+                   pattern="[\d]{2}.[\d]{2}.[\d]{4}"
+                   placeholder=" "
+                   title="Формат дд.мм.гггг"
+                   required>
+            <label class="upped-label">Дата рождения</label>
           </div>
           <div class="input_wrap" v-if="clickHandler === 'post'">
-            <input class="not-visible reg-input"
-                  v-bind:value=input_reg_date
-                  @input="input_reg_date = $event.target.value"
-                  type="text"
-                  required>
-            <label class="upped-label">Абонемент действует с: дд.мм.гггг</label>
+            <input class="reg-input need-show-error"
+                   v-bind:value=input_reg_date
+                   @input="input_reg_date = $event.target.value"
+                   type="text"
+                   pattern="[\d]{2}.[\d]{2}.[\d]{4}"
+                   title="Формат дд.мм.гггг"
+                   required>
+            <label class="upped-label">Абонемент действует с</label>
           </div>
           <div class="input_wrap display-row last_wrap">
             <input v-model="input_is_employee"
-                  type="checkbox"
-                  class="emp_checkbox"/>
+                   type="checkbox"
+                   pattern="[\d]{2}.[\d]{2}.[\d]{4}"
+                   class="emp_checkbox"/>
             <p v-bind:class="{active: input_is_employee}">Сотрудник</p>
           </div>
         </div>
@@ -115,26 +124,26 @@ export default {
     }
   },
   beforeCreate() {
-    if(this.emp_id != null){
+    if (this.emp_id != null) {
       Requests.getEmployee(this.emp_id).then(
-        e => {
-          this.input_first_name = e.full_name.split(' ')[0]
-          this.input_last_name = e.full_name.split(' ')[1]
-          this.input_mid_name = e.full_name.split(' ')[2]
-          this.input_phone = e.phone_number
-          this.input_birth = e.date_born
-          this.input_is_employee = e.is_employee
-          this.input_emp_id = e.department_id
-          this.selected = this.input_emp_id
-        }
+          e => {
+            this.input_first_name = e.full_name.split(' ')[0]
+            this.input_last_name = e.full_name.split(' ')[1]
+            this.input_mid_name = e.full_name.split(' ')[2]
+            this.input_phone = e.phone_number
+            this.input_birth = e.date_born
+            this.input_is_employee = e.is_employee
+            this.input_emp_id = e.department_id
+            this.selected = this.input_emp_id
+          }
       );
     }
     Requests.getDepartments().then(
         e => {
           this.departments = e
-          
+
           let today = new Date();
-          today.setMonth(today.getMonth()+1)
+          today.setMonth(today.getMonth() + 1)
           const mm = String(today.getMonth() + 1).padStart(2, '0');
           const yyyy = today.getFullYear()
           this.input_reg_date = '01.' + mm + '.' + yyyy;
@@ -142,7 +151,7 @@ export default {
     );
   },
   methods: {
-    setMainPage(){
+    setMainPage() {
       this.$emit('setMainPage')
     },
     editPeople() {
@@ -198,42 +207,6 @@ export default {
   flex-direction: row;
 }
 
-.change-people-button {
-  height: 20px;
-  width: 20px;
-  margin: 0 6px;
-  border-radius: 100%;
-  padding: 6px;
-  background-color: rgba(255, 255, 255, 10%);
-  cursor: pointer;
-  box-shadow: 1px 1px 4px #BBB;
-  transition: 0.3s;
-}
-
-.ribbon {
-  background: rgba(200, 200, 200, .42);
-  width: 50px;
-  height: 70px;
-  position: relative;
-  top: 19px;
-  border: 1px solid rgba(255, 255, 255, .3);
-  border-top: 2px solid rgba(255, 255, 255, .5);
-  border-bottom: 0;
-  border-radius: 5px 5px 0 0;
-  box-shadow: 0 0 3px rgba(0, 0, 0, .7);
-}
-
-.ribbon:before {
-  content: "";
-  display: block;
-  width: 15px;
-  height: 15px;
-  background: #4E535B;
-  border: 4px solid #cfd0d1;
-  margin: 18px auto;
-  box-shadow: inset 0 0 5px #000, 0 0 2px #000, 0 1px 1px 1px #A7A8AB;
-  border-radius: 100%;
-}
 
 .main-card {
   position: relative;
@@ -277,12 +250,12 @@ export default {
   background-color: #7c0b0b;
 }
 
-.logo{
-  width:50px;
+.logo {
+  width: 50px;
   transform: translateY(-10px);
 }
 
-.emp_checkbox{
+.emp_checkbox {
   width: 25px;
 }
 
@@ -316,7 +289,7 @@ export default {
 
 }
 
-.active{
+.active {
   color: #000;
   font-weight: bold;
 }
@@ -358,6 +331,13 @@ export default {
   background: #ffffff;
   border-radius: 10px;
   padding: 0 5px 0 5px;
+}
+
+.need-show-error:not(:placeholder-shown):invalid + label {
+  color: #cb3563;
+}
+.need-show-error:not(:placeholder-shown):valid + label {
+  color: #2ea630;
 }
 
 .reg-input[type=tel]:placeholder-shown {
