@@ -74,15 +74,14 @@ export default {
     },
   },
   mounted() { //TODO query
-    console.log(window.location.href.split('?')[1].split('=')[1].split('#')[0])
-    this.depID = window.location.href.split('?')[1].split('=')[1].split('#')[0]
+    //console.log(window.location.href.split('?')[1].split('=')[1].split('#')[0])
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("id");
+    this.depID = id;
     Requests.getEmployeesByDepId(this.depID).then(
         e => {
           this.cards = e
           console.log(e)
-          var url = new URL(window.location.href);
-          var c = url.searchParams.get("id");
-          alert('before: ' + c + '  after: ' + window.location.href.split('?')[1].split('=')[1].split('#')[0]);
         }
     )
   }

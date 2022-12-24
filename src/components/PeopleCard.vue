@@ -149,7 +149,9 @@ export default {
         e => {
           this.departments = e
           document.getElementById("job").value = this.job;
-          this.dep_id = window.location.href.split('?')[1].split('=')[1].split('#')[0] //.match(/\d/g).join("") 
+          const url = new URL(window.location.href);
+          const id = url.searchParams.get("id");
+          this.dep_id = id
           this.selected = this.dep_id
           
           const today = new Date();
