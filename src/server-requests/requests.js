@@ -62,8 +62,8 @@ class ServerRequests {
 
     async getEmployeesByDepId(id_departament) {
         let url = server_url
-        url += 'get_all_employees_on_id_departament/'
-        url += '?id_departament='
+        url += 'get_all_employees_on_id_departaments/'
+        url += '?id_departaments='
         url += id_departament
 
         const empList = await axios

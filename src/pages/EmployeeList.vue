@@ -80,6 +80,7 @@ export default {
         e => {
           this.cards = e
           console.log(e)
+          alert(window.location.href.split('?')[1].split('=')[1])
         }
     )
   }
