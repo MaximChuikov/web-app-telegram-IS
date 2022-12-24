@@ -65,7 +65,7 @@ export default {
 }
 
 .card {
-  height: 100px;
+  min-height: 100px;
   display: flex;
   justify-content: space-between;
   position: relative;

@@ -1,13 +1,6 @@
 <template>
   <PeopleCard click-handler="update"
               button-text="Сохранить изменения"
-              :first_name=first_name
-              :last_name=last_name
-              :mid_name=mid_name
-              :phone=phone
-              :job=job
-              :is_employee=is_employee
-              :birth=birth
               :emp_id=this.emp_id
               @setMainPage="setMainPage"
   />

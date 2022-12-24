@@ -92,47 +92,18 @@ export default {
      */
     clickHandler: String,
     buttonText: String,
-    job: {
-      type: Number,
-      default: 0
-    },
-    first_name: {
-      type: String,
-      default: ""
-    },
-    last_name: {
-      type: String,
-      default: ""
-    },
-    mid_name: {
-      type: String,
-      default: ""
-    },
-    phone: {
-      type: String,
-      default: ""
-    },
-    birth: {
-      type: String,
-      default: ""
-    },
-    is_employee: {
-      type: Boolean,
-      default: true
-    },
     emp_id: {
       type: Number
     }
   },
   data() {
     return {
-      input_job: this.job,
-      input_first_name: this.first_name,
-      input_last_name: this.last_name,
-      input_mid_name: this.mid_name,
-      input_phone: this.phone,
-      input_birth: this.birth,
-      input_is_employee: this.is_employee,
+      input_first_name: '',
+      input_last_name: '',
+      input_mid_name: '',
+      input_phone: '',
+      input_birth: '',
+      input_is_employee: Boolean,
       input_emp_id: this.emp_id,
 
       input_reg_date: '',
@@ -144,21 +115,31 @@ export default {
     }
   },
   beforeCreate() {
-    console.log('hello')
+    if(this.emp_id != null){
+      Requests.getEmployee(this.emp_id).then(
+        e => {
+          this.input_first_name = e.full_name.split(' ')[0]
+          this.input_last_name = e.full_name.split(' ')[1]
+          this.input_mid_name = e.full_name.split(' ')[2]
+          this.input_phone = e.phone_number
+          this.input_birth = e.date_born
+          this.input_is_employee = e.is_employee
+          this.input_emp_id = e.department_id
+          this.selected = this.input_emp_id
+        }
+      );
+    }
     Requests.getDepartments().then(
         e => {
           this.departments = e
-          document.getElementById("job").value = this.job;
-          this.dep_id = window.location.href.split('?')[1].split('=')[1].split('#')[0] //.match(/\d/g).join("") 
-          this.selected = this.dep_id
           
-          const today = new Date();
+          let today = new Date();
+          today.setMonth(today.getMonth()+1)
           const mm = String(today.getMonth() + 1).padStart(2, '0');
           const yyyy = today.getFullYear()
           this.input_reg_date = '01.' + mm + '.' + yyyy;
         }
     );
-    console.log(this.input_reg_date)
   },
   methods: {
     setMainPage(){
@@ -470,6 +451,4 @@ export default {
 button:hover {
   background-position: right;
 }
-
-
 </style>

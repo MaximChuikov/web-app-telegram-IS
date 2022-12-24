@@ -106,14 +106,18 @@ class ServerRequests {
                   "ngrok-skip-browser-warning": "69420"
                 }
             })
-            .then(function(response) {
-                return response.json();
-              })
-              .then(function(data) {
-                var userid = JSON.parse(data);
-                console.log(userid);
-                return userid;
-              })
+              .then(e => {
+                console.log(e.data.result)
+                return {
+                    full_name: e.data.result.full_name,
+                    id: e.data.result.id,
+                    date_born: e.data.result.date_born,
+                    department_id: e.data.result.department_id,
+                    phone_number: e.data.result.phone_number,
+                    abonnement_status: e.data.result.abonnement_status,
+                    is_employee: e.data.result.is_employee
+                }
+            })
         return empList
     }
 
