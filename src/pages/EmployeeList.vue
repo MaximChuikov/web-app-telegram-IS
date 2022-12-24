@@ -75,9 +75,10 @@ export default {
   },
   mounted() { //TODO query
     //console.log(window.location.href.split('?')[1].split('=')[1].split('#')[0])
-    const url = new URL(window.location.href);
-    const id = url.searchParams.get("id");
-    this.depID = id;
+    var url = new URL(window.location.href);
+    var id = url.searchParams.get("id");
+    alert(id);
+    this.depID = window.location.href.split('?')[1].split('=')[1].split('#')[0]
     Requests.getEmployeesByDepId(this.depID).then(
         e => {
           this.cards = e
