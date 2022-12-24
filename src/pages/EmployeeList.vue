@@ -80,7 +80,9 @@ export default {
         e => {
           this.cards = e
           console.log(e)
-          alert('before: ' + window.location.href + '  after: ' + window.location.href.split('?')[1].split('=')[1].split('#')[0]);
+          var url = new URL(window.location.href);
+          var c = url.searchParams.get("id");
+          alert('before: ' + c + '  after: ' + window.location.href.split('?')[1].split('=')[1].split('#')[0]);
         }
     )
   }
