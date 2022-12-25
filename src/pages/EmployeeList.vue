@@ -1,8 +1,8 @@
 <template>
-<!--  <BlockLink text="Добавить"-->
-<!--             class="add-btn"-->
-<!--             avatar="https://kopeysk.is74.ru/oldsite/abonents/img/icon_job2.png"-->
-<!--             @click="redirectReg()"/>-->
+  <BlockLink text="Добавить"
+             class="add-btn"
+             avatar="https://kopeysk.is74.ru/oldsite/abonents/img/icon_job2.png"
+             @click="redirectReg()"/>
   <CardList
       v-if="filteredData.length==0"
       @changeStatus="changeStatus"
@@ -21,14 +21,14 @@
 <script>
 import CardList from '../components/CardList.vue'
 import axios from 'axios';
-// import BlockLink from "@/components/BlockLink";
+import BlockLink from "@/components/BlockLink";
 import Requests from "@/server-requests/requests";
 
 export default {
   name: 'App',
   emits: ['changeEmp', 'setRegPage'],
   components: {
-    // BlockLink,
+    BlockLink,
     CardList,
   },
   data() {
