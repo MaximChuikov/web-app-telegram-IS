@@ -78,7 +78,9 @@
             <input v-model="input_is_employee"
                    type="checkbox"
                    pattern="[\d]{2}.[\d]{2}.[\d]{4}"
-                   class="emp_checkbox"/>
+                   class="emp_checkbox"
+                   style="width: 20px; height: 20px; margin: auto 5px;"
+            />
             <p v-bind:class="{active: input_is_employee}">Сотрудник</p>
           </div>
         </div>
@@ -336,6 +338,7 @@ export default {
 .need-show-error:not(:placeholder-shown):invalid + label {
   color: #cb3563;
 }
+
 .need-show-error:not(:placeholder-shown):valid + label {
   color: #2ea630;
 }
