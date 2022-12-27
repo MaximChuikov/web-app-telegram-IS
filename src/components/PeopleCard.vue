@@ -114,7 +114,7 @@ export default {
       input_mid_name: '',
       input_phone: '',
       input_birth: '',
-      input_is_employee: Boolean,
+      input_is_employee: true,
       input_emp_id: this.emp_id,
 
       input_reg_date: '',
