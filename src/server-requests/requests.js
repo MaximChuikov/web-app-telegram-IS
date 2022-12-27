@@ -41,7 +41,7 @@ class ServerRequests {
     async deletePeople(emp_id) {
         let url = server_url
         url += 'delete_employee?'
-        url += 'id=' + emp_id
+        url += 'id_employee=' + emp_id
         await axios.delete(url)
             .then(() => {
                 //
