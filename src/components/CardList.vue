@@ -3,7 +3,7 @@
     <div class="card" v-for="card in cards" v-bind:key="card.id">
       <div class="card__info">
         <p class="card__name">{{ card.full_name }}</p>
-        <p class="card__phone">{{ card.phone_number }}</p>
+        <!-- <p class="card__phone">{{ card.phone_number }}</p> -->
       </div>
       <div class="card__actions">
         <img class="edit-button" @click="redirectEdit(card.id)" :src="require('../assets/images/editWhite.png')"/>
